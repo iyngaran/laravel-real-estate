@@ -1,0 +1,47 @@
+{
+  "name": "iyngaran/laravel-real-estate",
+  "description": "The laravel package to manage real estate ads",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Iyngaran Iyathurai",
+      "email": "dev@iyngaran.info"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "iyngaran/api-response": "dev-develop",
+    "iyngaran/laravel-categories": "v1.0-beta.1",
+    "spatie/data-transfer-object": "^1.13"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^5.0@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Iyngaran\\RealEstate\\": "src/"
+    },
+    "classmap": [
+      "database/factories"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Iyngaran\\RealEstate\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Iyngaran\\RealEstate\\RealEstateBaseServiceProvider"
+      ]
+    }
+  },
+  "repositories": {
+    "dev-package": {
+      "type": "vcs",
+      "url": "https://github.com/iyngaran/laravel-categories.git"
+    }
+  }
+}
