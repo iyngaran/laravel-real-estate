@@ -7,11 +7,12 @@ namespace Iyngaran\RealEstate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Iyngaran\RealEstate\Facades\RealEstate;
-use Iyngaran\RealEstate\Models\RealEstatePost;
 use Iyngaran\RealEstate\Repositories\Contact\ContactRepository;
 use Iyngaran\RealEstate\Repositories\Contact\ContactRepositoryInterface;
 use Iyngaran\RealEstate\Repositories\RealEstate\RealEstateRepository;
 use Iyngaran\RealEstate\Repositories\RealEstate\RealEstateRepositoryInterface;
+use Iyngaran\RealEstate\Repositories\Service\ServiceRepository;
+use Iyngaran\RealEstate\Repositories\Service\ServiceRepositoryInterface;
 
 class RealEstateBaseServiceProvider extends ServiceProvider
 {
@@ -104,5 +105,6 @@ class RealEstateBaseServiceProvider extends ServiceProvider
     {
         $this->app->bind(RealEstateRepositoryInterface::class, RealEstateRepository::class);
         $this->app->bind(ContactRepositoryInterface::class, ContactRepository::class);
+        $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
     }
 }

@@ -22,7 +22,7 @@ class ContactRepository implements ContactRepositoryInterface
 
     public function findByEmail(string $emailAddress): ?Contact
     {
-        $contact = Contact::where('email', $emailAddress)->first();;
+        $contact = Contact::where('email', $emailAddress)->first();
         if (!$contact) {
             throw new ContactNotFoundException("The contact email # ".$emailAddress." not found");
         }

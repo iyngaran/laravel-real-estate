@@ -16,6 +16,7 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->enum('status',[1,0])->default(\Iyngaran\RealEstate\Models\Service::ENABLED);
             $table->softDeletes();
             $table->timestamps();
         });

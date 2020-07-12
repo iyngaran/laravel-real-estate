@@ -1,6 +1,6 @@
 <?php
 return [
-    'path' => 'ads',
+    'path' => 'ads/',
     'middleware' => 'auth:api',
     'page_limit' => 30,
     'driver' => 'file',
