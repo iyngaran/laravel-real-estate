@@ -39,6 +39,14 @@ class RealEstatePost extends Model
         return $this->belongsTo(Contact::class, "contact_id");
     }
 
+    /*
+     * Sale / Rent
+     */
+    public function postFor()
+    {
+        return $this->belongsTo(\Iyngaran\Category\Models\Category::class, "real_estate_for");
+    }
+
     public function category()
     {
         return $this->belongsTo(\Iyngaran\Category\Models\Category::class, "property_category");

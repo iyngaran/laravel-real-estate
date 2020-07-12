@@ -16,7 +16,7 @@ class CreateRealestatePostsTable extends Migration
         Schema::create('real_estate_posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->tinyInteger('real_estate_for');
+            $table->unsignedBigInteger('real_estate_for')->nullable(true);
             $table->tinyInteger('condition');
             $table->string('location_country');
             $table->string('location_state');
@@ -45,6 +45,7 @@ class CreateRealestatePostsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
+            $table->foreign('real_estate_for')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('property_category')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('property_sub_category')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('set null');
