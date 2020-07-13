@@ -113,6 +113,9 @@ class CreateRealEstateTest extends TestCase
 
         $this->assertNotNull($realEstate->id);
         $this->assertEquals(1, RealEstatePost::count());
+        $this->assertEquals(5,$realEstate->services->count());
+        $this->assertEquals(5,Service::count());
+
         $this->assertEquals(
             [
                 'id' => $services[0]->id,
