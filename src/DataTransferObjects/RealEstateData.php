@@ -21,7 +21,7 @@ class RealEstateData extends DataTransferObject
     public $title;
 
     /**
-     * @var integer
+     * @var \Iyngaran\Category\Models\Category
      */
     public $realEstateFor;
 
@@ -56,7 +56,7 @@ class RealEstateData extends DataTransferObject
     public $addressLine_2;
 
     /**
-     * @var string|null
+     * @var array|null
      */
     public $coordinates;
 
@@ -86,9 +86,19 @@ class RealEstateData extends DataTransferObject
     public $size;
 
     /**
+     * @var string|null
+     */
+    public $sizeUnit;
+
+    /**
      * @var float|null
      */
     public $age;
+
+    /**
+     * @var string|null
+     */
+    public $ageUnit;
 
     /**
      * @var float|null
@@ -96,19 +106,29 @@ class RealEstateData extends DataTransferObject
     public $rent;
 
     /**
+     * @var string|null
+     */
+    public $rentUnit;
+
+    /**
      * @var float|null
      */
     public $minLeaseTerm;
 
     /**
-     * @var integer|null
+     * @var string|null
      */
-    public $advancedPaymentUnit;
+    public $minLeaseTermUnit;
 
     /**
      * @var integer|null
      */
     public $advancedPayment;
+
+    /**
+     * @var string|null
+     */
+    public $advancedPaymentUnit;
 
     /**
      * @var integer|null
@@ -177,22 +197,26 @@ class RealEstateData extends DataTransferObject
                         'city' => $request->input('data.attributes.location.city'),
                         'addressLine_1' => $request->input('data.attributes.location.address_line_1'),
                         'addressLine_2' => $request->input('data.attributes.location.address_line_2'),
-                        'coordinates' => json_encode($request->input('data.attributes.location.coordinates')),
+                        'coordinates' => $request->input('data.attributes.location.coordinates'),
                         'shortDescription' => $request->input('data.attributes.short_description'),
                         'detailDescription' => $request->input('data.attributes.detail_description'),
                         'numberOfBedrooms' => $request->input('data.attributes.number_of_bedrooms'),
                         'numberOfBathrooms' => $request->input('data.attributes.number_of_bathrooms'),
-                        'size' => (float)$request->input('data.attributes.size'),
-                        'age' => (float)$request->input('data.attributes.age'),
-                        'rent' => (float)$request->input('data.attributes.rent'),
-                        'minLeaseTerm' => (float)$request->input('data.attributes.min_lease_term'),
-                        'advancedPaymentUnit' => $request->input('data.attributes.advanced_payment_unit'),
-                        'advancedPayment' => $request->input('data.attributes.advanced_payment'),
+                        'size' => (float)$request->input('data.attributes.size.size'),
+                        'sizeUnit' => $request->input('data.attributes.size.unit'),
+                        'age' => (float)$request->input('data.attributes.age.age'),
+                        'ageUnit' => $request->input('data.attributes.age.unit'),
+                        'rent' => (float)$request->input('data.attributes.rent.rent'),
+                        'rentUnit' => $request->input('data.attributes.rent.unit'),
+                        'minLeaseTerm' => (float)$request->input('data.attributes.min_lease_term.term'),
+                        'minLeaseTermUnit' => $request->input('data.attributes.min_lease_term.unit'),
+                        'advancedPayment' => $request->input('data.attributes.advanced_payment.payment'),
+                        'advancedPaymentUnit' => $request->input('data.attributes.advanced_payment.unit'),
                         'utilityBillPaymentsIncluded' => $request->input('data.attributes.utility_bill_payments_included'),
                         'negotiable' => $request->input('data.attributes.negotiable'),
                         'numberOfParkingSlots' => $request->input('data.attributes.number_of_parking_slots'),
-                        'category' => Category::find($request->input('data.attributes.category_id')),
-                        'subCategory' => Category::find($request->input('data.attributes.sub_category_id')),
+                        'category' => Category::find($request->input('data.attributes.category.id')),
+                        'subCategory' => Category::find($request->input('data.attributes.sub_category.id')),
                         'contact' => $contact,
                         'services' => $services
                 ]

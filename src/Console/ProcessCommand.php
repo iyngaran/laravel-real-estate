@@ -17,7 +17,7 @@ class ProcessCommand extends Command
     public function handle()
     {
 
-        if (Category::configNotPublished()) {
+        if (RealEstate::configNotPublished()) {
             return $this->warn(
                 'Please publish the config file by running '
                 .'\'php artisan vendor:publish --tag=realestate-config\''
@@ -25,7 +25,7 @@ class ProcessCommand extends Command
         }
 
         try {
-            $files = File::files('storage/app/Category/data');
+            $files = File::files('storage/app/RealEstate/data');
             dd($files);
             // Validate the files
 

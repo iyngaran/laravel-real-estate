@@ -30,9 +30,13 @@ class CreateRealEstatePostActionTest extends TestCase
         $category = factory(\Iyngaran\Category\Models\Category::class)->create();
         $subCategory = factory(\Iyngaran\Category\Models\Category::class)->create();
 
+        $size_unit = $faker->randomElement(['Perches', 'Acres', 'Square Metres', 'Square Feet', 'Square yards', 'Hectare']);
+        $age_unit = $faker->randomElement(['Months', 'Years']);
+        $currency = $faker->randomElement(['LKR' => 'RS', 'USD' => '$']);
+
         $realEstatePostData = [
             'title' => $faker->word(),
-            'realEstateFor' => $faker->randomElement([RealEstatePost::FOR_RENT,RealEstatePost::FOR_SALE]),
+            'realEstateFor' => factory(\Iyngaran\Category\Models\Category::class)->create(),
             'condition' => $faker->randomElement([RealEstatePost::CONDITION_NEW,RealEstatePost::CONDITION_USED]),
             'country' => $faker->country,
             'state' => $faker->state,
@@ -45,25 +49,22 @@ class CreateRealEstatePostActionTest extends TestCase
             'numberOfBedrooms' => $faker->randomNumber(1),
             'numberOfBathrooms' => $faker->randomNumber(1),
             'size' => $faker->randomNumber(2),
+            'sizeUnit' => $size_unit,
             'age' => $faker->randomNumber(1),
+            'ageUnit' => $age_unit,
             'rent' => $faker->randomNumber(2),
+            'rentUnit' => $currency,
             'minLeaseTerm' => $faker->randomNumber(2),
-            'advancedPaymentUnit' => $faker->randomElement(
-                [
-                RealEstatePost::ADVANCED_PAYMENT_UNIT_MONTHS,
-                RealEstatePost::ADVANCED_PAYMENT_UNIT_YEARS,
-                RealEstatePost::ADVANCED_PAYMENT_UNIT_AMOUNT
-                ]
-            ),
+            'minLeaseTermUnit' => $age_unit,
             'advancedPayment' => $faker->randomNumber(5),
+            'advancedPaymentUnit' => $currency,
             'utilityBillPaymentsIncluded' => $faker->randomElement([RealEstatePost::YES,RealEstatePost::NO]),
             'negotiable' => $faker->randomElement([RealEstatePost::YES,RealEstatePost::NO]),
             'numberOfParkingSlots' => $faker->randomNumber(2),
             'contact' => $contact,
             'category' => $category,
             'subCategory' => $subCategory,
-            'services' => $services,
-
+            'services' => $services
         ];
 
         $createRealEstatePostAction =  new CreateRealEstatePostAction();

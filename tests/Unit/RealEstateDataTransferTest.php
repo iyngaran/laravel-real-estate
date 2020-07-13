@@ -32,35 +32,50 @@ class RealEstateDataTransferTest extends TestCase
         $category = factory(\Iyngaran\Category\Models\Category::class)->create();
         $subCategory = factory(\Iyngaran\Category\Models\Category::class)->create();
 
+        $size_unit = $faker->randomElement(['Perches', 'Acres', 'Square Metres', 'Square Feet', 'Square yards', 'Hectare']);
+        $age_unit = $faker->randomElement(['Months', 'Years']);
+        $currency = $faker->randomElement(['LKR' => 'RS', 'USD' => '$']);
 
         $data = [
             'data' => [
                 'attributes' => [
                     'title' => $faker->word(),
                     'title' => $faker->word(),
-                    'real_estate_for' => $faker->randomElement([RealEstatePost::FOR_RENT,RealEstatePost::FOR_SALE]),
+                    'real_estate_for' => factory(\Iyngaran\Category\Models\Category::class)->create(),
                     'condition' => $faker->randomElement([RealEstatePost::CONDITION_NEW,RealEstatePost::CONDITION_USED]),
                     'short_description' => $faker->paragraph(1),
                     'detail_description' => $faker->paragraph(3),
                     'number_of_bedrooms' => $faker->randomNumber(1),
                     'number_of_bathrooms' => $faker->randomNumber(1),
-                    'size' => $faker->randomNumber(2),
-                    'age' => $faker->randomNumber(1),
-                    'rent' => $faker->randomNumber(2),
-                    'min_lease_term' => $faker->randomNumber(2),
-                    'advanced_payment_unit' => $faker->randomElement(
-                        [
-                        RealEstatePost::ADVANCED_PAYMENT_UNIT_MONTHS,
-                        RealEstatePost::ADVANCED_PAYMENT_UNIT_YEARS,
-                        RealEstatePost::ADVANCED_PAYMENT_UNIT_AMOUNT
-                        ]
-                    ),
-                    'advanced_payment' => $faker->randomNumber(5),
+                    'size' => [
+                        'size' => $faker->randomNumber(2),
+                        'unit' => $size_unit,
+                    ],
+                    'age' => [
+                        'age' => $faker->randomNumber(1),
+                        'unit' => $age_unit,
+                    ],
+                    'rent' => [
+                        'rent' => $faker->randomNumber(2),
+                        'unit' => $currency
+                    ],
+                    'min_lease_term' => [
+                        'term' => $faker->randomNumber(2),
+                        'unit' => $age_unit,
+                    ],
+                    'advanced_payment' => [
+                        'payment' => 200,
+                        'unit' => $currency
+                    ],
                     'utility_bill_payments_included' => $faker->randomElement([RealEstatePost::YES,RealEstatePost::NO]),
                     'negotiable' => $faker->randomElement([RealEstatePost::YES,RealEstatePost::NO]),
                     'number_of_parking_slots' => $faker->randomNumber(2),
-                    'category_id' => $category->id,
-                    'sub_category_id' => $subCategory->id,
+                    'category' => [
+                        'id' => $category->id
+                    ],
+                    'sub_category' => [
+                        'id' => $subCategory->id
+                    ],
                     'location' => [
                         'country' => $faker->country,
                         'state' => $faker->state,

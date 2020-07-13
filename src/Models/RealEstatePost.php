@@ -14,16 +14,18 @@ class RealEstatePost extends Model
     const YES = 1;
     const NO = 2;
 
-    const FOR_RENT = 1;
-    const FOR_SALE = 2;
-
     const CONDITION_USED = 1;
     const CONDITION_NEW = 2;
 
-    const ADVANCED_PAYMENT_UNIT_MONTHS = 1;
-    const ADVANCED_PAYMENT_UNIT_YEARS = 2;
-    const ADVANCED_PAYMENT_UNIT_AMOUNT = 3;
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'location_coordinates' => 'array'
+    ];
 
     public function services()
     {

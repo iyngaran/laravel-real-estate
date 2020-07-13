@@ -30,4 +30,21 @@ class RealEstate
         return config('iyngaran.realestate.middleware');
     }
 
+    public function units()
+    {
+        return [
+            'size' => config('iyngaran.realestate.size_units'),
+            'duration' => config('iyngaran.realestate.duration_units'),
+            'currencies' => config('iyngaran.realestate.currencies')
+        ];
+    }
+
+    public function standardUnits()
+    {
+        return [
+            'size' => config('iyngaran.realestate.standard_size_units'),
+            'duration' => config('iyngaran.realestate.standard_duration_units'),
+            'currency' => config('iyngaran.realestate.standard_currency'),
+        ];
+    }
 }

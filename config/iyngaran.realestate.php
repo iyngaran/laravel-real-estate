@@ -14,4 +14,20 @@ return [
         'password' => 'password',
         'database_name' => 'old_real_estate',
     ],
+    'size_units' => [
+        'Perches',
+        'Acres',
+        'Square Metres',
+        'Square Feet',
+        'Square yards',
+        'Hectare',
+    ],
+    'duration_units' => [
+        'Months',
+        'Years'
+    ],
+    'currencies' => [
+        'LKR' => 'RS',
+        'USD' => '$'
+    ]
 ];
