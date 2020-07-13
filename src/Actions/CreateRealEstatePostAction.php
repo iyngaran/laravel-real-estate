@@ -45,7 +45,7 @@ class CreateRealEstatePostAction
             $realEstatePost->contact()->associate($attributes['contact']);
             $realEstatePost->category()->associate($attributes['category']);
             $realEstatePost->subCategory()->associate($attributes['subCategory']);
-            $realEstatePost->services()->sync($attributes['services']);
+            $realEstatePost->services()->saveMany($attributes['services']);
         }
 
         return $realEstatePost;

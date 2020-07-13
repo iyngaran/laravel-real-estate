@@ -170,21 +170,20 @@ class RealEstateData extends DataTransferObject
     public static function fromRequest(Request $request): array
     {
         $contact = null;
-        $services = [];
+        $serviceList = [];
         //$contact = App::make(ContactRepositoryInterface::class)->findByEmail($attributes['email']);
         if (!$contact = Contact::find($request->input('data.attributes.contact.email'))) {
                 $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request));
         }
 
-        if ($services = $request->input('data.attributes.services')) {
+        if ($services = $request->input('data.attributes.service.ids')) {
             foreach($services as $service_data) {
                 $service = Service::find($service_data['id']);
                 if ($service) {
-                    array_push($services, $service);
+                    array_push($serviceList, $service);
                 }
             }
         }
-
 
         return  (
             new self(
@@ -218,7 +217,7 @@ class RealEstateData extends DataTransferObject
                         'category' => Category::find($request->input('data.attributes.category.id')),
                         'subCategory' => Category::find($request->input('data.attributes.sub_category.id')),
                         'contact' => $contact,
-                        'services' => $services
+                        'services' => $serviceList
                 ]
             )
         )->toArray();

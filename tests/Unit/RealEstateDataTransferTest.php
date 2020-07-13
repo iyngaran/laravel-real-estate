@@ -32,6 +32,14 @@ class RealEstateDataTransferTest extends TestCase
         $category = factory(\Iyngaran\Category\Models\Category::class)->create();
         $subCategory = factory(\Iyngaran\Category\Models\Category::class)->create();
 
+        $services = factory(Service::class, 5)->create();
+        $serviceIds = [];
+        if ($services) {
+            foreach($services as $service) {
+                array_push($serviceIds, ['id'=>$service->id]);
+            }
+        }
+
         $size_unit = $faker->randomElement(['Perches', 'Acres', 'Square Metres', 'Square Feet', 'Square yards', 'Hectare']);
         $age_unit = $faker->randomElement(['Months', 'Years']);
         $currency = $faker->randomElement(['LKR' => 'RS', 'USD' => '$']);
@@ -39,7 +47,6 @@ class RealEstateDataTransferTest extends TestCase
         $data = [
             'data' => [
                 'attributes' => [
-                    'title' => $faker->word(),
                     'title' => $faker->word(),
                     'real_estate_for' => factory(\Iyngaran\Category\Models\Category::class)->create(),
                     'condition' => $faker->randomElement([RealEstatePost::CONDITION_NEW,RealEstatePost::CONDITION_USED]),
@@ -91,6 +98,9 @@ class RealEstateDataTransferTest extends TestCase
                         'name' => $faker->firstName,
                         'phone_numbers' => $faker->phoneNumber.",".$faker->phoneNumber,
                         'email' => $faker->email
+                    ],
+                    'service' => [
+                        'ids' => $serviceIds
                     ]
                 ]
             ]
