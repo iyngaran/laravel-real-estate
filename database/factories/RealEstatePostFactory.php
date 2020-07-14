@@ -15,7 +15,7 @@ $factory->define(RealEstatePost::class, function (Faker $faker) {
     $currency = $faker->randomElement(['LKR' => 'RS', 'USD' => '$']);
 
     return [
-        'title' => $faker->title,
+        'title' => ucfirst($faker->sentence),
         'real_estate_for' => factory(\Iyngaran\Category\Models\Category::class),
         'condition' => $faker->randomElement([RealEstatePost::CONDITION_NEW,RealEstatePost::CONDITION_USED]),
         'location_country' => $faker->country,
