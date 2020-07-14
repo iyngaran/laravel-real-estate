@@ -7,6 +7,6 @@ use \Iyngaran\RealEstate\Models\Service;
 
 $factory->define(Service::class, function (Faker $faker) {
     return [
-        'name' => $faker->title
+        'name' => ucfirst($faker->word)
     ];
 });

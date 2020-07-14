@@ -170,19 +170,15 @@ class RealEstateData extends DataTransferObject
     public static function fromRequest(Request $request): array
     {
         $contact = null;
-        $serviceList = [];
+        $serviceList = null;
         //$contact = App::make(ContactRepositoryInterface::class)->findByEmail($attributes['email']);
         if (!$contact = Contact::find($request->input('data.attributes.contact.email'))) {
                 $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request));
         }
 
         if ($services = $request->input('data.attributes.service.ids')) {
-            foreach($services as $service_data) {
-                $service = Service::find($service_data['id']);
-                if ($service) {
-                    array_push($serviceList, $service);
-                }
-            }
+            $service_ids = array_column($services, 'id');
+            $serviceList =  Service::whereIn('id', $service_ids)->get();
         }
 
         return  (

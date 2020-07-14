@@ -6,11 +6,12 @@ namespace Iyngaran\RealEstate\Tests\Unit;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Iyngaran\RealEstate\Actions\CreateRealEstatePostAction;
+use Iyngaran\RealEstate\Actions\UpdateRealEstatePostAction;
 use Iyngaran\RealEstate\Models\RealEstatePost;
 use Iyngaran\RealEstate\Models\Service;
 use Iyngaran\RealEstate\Tests\TestCase;
 
-class CreateRealEstatePostActionTest extends TestCase
+class UpdateRealEstatePostActionTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -22,9 +23,10 @@ class CreateRealEstatePostActionTest extends TestCase
     /**
      * @test 
      */
-    public function create_real_estate_post_action_test()
+    public function update_real_estate_post_action_test()
     {
         $faker = \Faker\Factory::create();
+        $factoryRealEstatePost = factory(\Iyngaran\RealEstate\Models\RealEstatePost::class)->create();
         $contact = factory(\Iyngaran\RealEstate\Models\Contact::class)->create();
         $services = factory(Service::class, 5)->create();
         $realEstateFor = factory(\Iyngaran\Category\Models\Category::class)->create();
@@ -68,9 +70,9 @@ class CreateRealEstatePostActionTest extends TestCase
             'services' => $services
         ];
 
-        $createRealEstatePostAction =  new CreateRealEstatePostAction();
-        $realEstatePost = $createRealEstatePostAction->execute($realEstatePostData);
-
+        $updateRealEstatePostAction =  new UpdateRealEstatePostAction();
+        $updatedRealEstatePost = $updateRealEstatePostAction->execute($factoryRealEstatePost->id, $realEstatePostData);
+        $realEstatePost = $updatedRealEstatePost;
         $this->assertNotNull($realEstatePost->id);
         $this->assertEquals(1, RealEstatePost::count());
         $this->assertEquals($realEstateFor->name, $realEstatePost->postFor->name);
@@ -80,5 +82,6 @@ class CreateRealEstatePostActionTest extends TestCase
         $this->assertEquals($subCategory->name, $realEstatePost->subCategory->name);
         $this->assertEquals($subCategory->id, $realEstatePost->property_sub_category);
         $this->assertEquals(5, \DB::table('realestate_services')->where('realestate_post_id', $realEstatePost->id)->count());
+
     }
 }

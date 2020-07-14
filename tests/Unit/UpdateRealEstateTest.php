@@ -69,7 +69,8 @@ class UpdateRealEstateTest extends TestCase
             ]
         );
 
-        $real_estate->services()->attach($services);
+        $serviceIds = $services->pluck('id');
+        $real_estate->services()->sync($serviceIds);
         $this->assertEquals(1, RealEstatePost::count());
         $this->assertEquals($subCategory->parent_id, $real_estate->property_category);
         $this->assertEquals($subCategory->id, $real_estate->property_sub_category);

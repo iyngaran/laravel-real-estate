@@ -46,3 +46,8 @@ $factory->define(RealEstatePost::class, function (Faker $faker) {
         'contact_id' => $contact = factory(Contact::class)->create()
     ];
 });
+
+$factory->afterCreating(RealEstatePost::class, function ($row, $faker) {
+    $services = factory(\Iyngaran\RealEstate\Models\Service::class, 5)->create();
+    $row->services()->saveMany($services);
+});

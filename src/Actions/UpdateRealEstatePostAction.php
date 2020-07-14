@@ -4,13 +4,19 @@
 namespace Iyngaran\RealEstate\Actions;
 
 
+use Iyngaran\RealEstate\Exceptions\RealEstateNotFoundException;
 use Iyngaran\RealEstate\Models\RealEstatePost;
 
-class CreateRealEstatePostAction
+class UpdateRealEstatePostAction
 {
-    public function execute(array $attributes): RealEstatePost
+    public function execute(int $id, array $attributes): RealEstatePost
     {
-        $realEstatePost = RealEstatePost::create(
+        $realEstatePost = RealEstatePost::find($id);
+        if (!$realEstatePost) {
+            throw new RealEstateNotFoundException("The Real estate post id # ".$id." not found");
+        }
+
+        $realEstatePost->update(
             [
                 'title' => $attributes['title'],
                 'condition' => $attributes['condition'],
