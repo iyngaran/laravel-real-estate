@@ -65,7 +65,8 @@ class UpdateRealEstateTest extends TestCase
                 'number_of_parking_slots' => $faker->randomNumber(2),
                 'property_category' => $subCategory->parent_id,
                 'property_sub_category' => $subCategory->id,
-                'contact_id' => $contact->id
+                'contact_id' => $contact->id,
+                'status' => $faker->randomElement(['Published','Drafted','Pending']),
             ]
         );
 

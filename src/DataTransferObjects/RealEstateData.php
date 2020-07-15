@@ -121,7 +121,7 @@ class RealEstateData extends DataTransferObject
     public $minLeaseTermUnit;
 
     /**
-     * @var integer|null
+     * @var double|null
      */
     public $advancedPayment;
 
@@ -165,7 +165,10 @@ class RealEstateData extends DataTransferObject
      */
     public $services;
 
-
+    /**
+     * @var string|null
+     */
+    public $status;
 
     public static function fromRequest(Request $request): array
     {
@@ -205,7 +208,7 @@ class RealEstateData extends DataTransferObject
                         'rentUnit' => $request->input('data.attributes.rent.unit'),
                         'minLeaseTerm' => (float)$request->input('data.attributes.min_lease_term.term'),
                         'minLeaseTermUnit' => $request->input('data.attributes.min_lease_term.unit'),
-                        'advancedPayment' => $request->input('data.attributes.advanced_payment.payment'),
+                        'advancedPayment' => (double)$request->input('data.attributes.advanced_payment.payment'),
                         'advancedPaymentUnit' => $request->input('data.attributes.advanced_payment.unit'),
                         'utilityBillPaymentsIncluded' => $request->input('data.attributes.utility_bill_payments_included'),
                         'negotiable' => $request->input('data.attributes.negotiable'),
@@ -213,7 +216,8 @@ class RealEstateData extends DataTransferObject
                         'category' => Category::find($request->input('data.attributes.category.id')),
                         'subCategory' => Category::find($request->input('data.attributes.sub_category.id')),
                         'contact' => $contact,
-                        'services' => $serviceList
+                        'services' => $serviceList,
+                        'status' => $request->input('data.attributes.status')
                 ]
             )
         )->toArray();

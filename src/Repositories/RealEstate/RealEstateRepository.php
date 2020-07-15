@@ -4,8 +4,11 @@
 namespace Iyngaran\RealEstate\Repositories\RealEstate;
 
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Config;
 use Iyngaran\RealEstate\Exceptions\RealEstateNotFoundException;
 use Iyngaran\RealEstate\Models\RealEstatePost;
+use Illuminate\Http\Request;
+use Iyngaran\RealEstate\Search\RealEstateSearch;
 
 class RealEstateRepository implements RealEstateRepositoryInterface
 {
@@ -28,8 +31,9 @@ class RealEstateRepository implements RealEstateRepositoryInterface
         return $realEstate;
     }
 
-    public function search(array $query): LengthAwarePaginator
+    public function search(Request $request): ?LengthAwarePaginator
     {
-        // TODO: Implement search() method.
+        $page_limit = Config::get('iyngaran.page_limit', 20);
+        return (new RealEstateSearch())->getPaginatedResults($request, $page_limit);
     }
 }

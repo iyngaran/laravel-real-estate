@@ -101,7 +101,8 @@ class UpdateRealEstateTest extends TestCase
                     ],
                     'service' => [
                         'ids' => $serviceIds
-                    ]
+                    ],
+                    'status' => $faker->randomElement(['Published','Drafted','Pending']),
                 ]
             ]
         ];

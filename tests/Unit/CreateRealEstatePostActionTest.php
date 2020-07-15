@@ -65,7 +65,8 @@ class CreateRealEstatePostActionTest extends TestCase
             'contact' => $contact,
             'category' => $category,
             'subCategory' => $subCategory,
-            'services' => $services
+            'services' => $services,
+            'status' => $faker->randomElement(['Published','Drafted','Pending']),
         ];
 
         $createRealEstatePostAction =  new CreateRealEstatePostAction();
