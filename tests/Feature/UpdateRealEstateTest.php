@@ -5,7 +5,6 @@ namespace Iyngaran\RealEstate\Tests\Feature;
 
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Iyngaran\RealEstate\Actions\CreateRealEstatePostAction;
 use Iyngaran\RealEstate\Actions\UpdateRealEstatePostAction;
 use Iyngaran\RealEstate\DataTransferObjects\RealEstateData;
 use Iyngaran\RealEstate\Models\Contact;
