@@ -48,8 +48,8 @@ class RealEstatePost extends JsonResource
                     'utility_bill_payments_included' => $this->utility_bill_payments_included,
                     'negotiable' => $this->negotiable,
                     'number_of_parking_slots' => $this->number_of_parking_slots,
-                    'category' => $this->category,
-                    'sub_category' => $this->subCategory,
+                    'category' => new \Iyngaran\Category\Http\Resources\Category($this->category),
+                    'sub_category' => new \Iyngaran\Category\Http\Resources\Category($this->subCategory),
                     'location' => [
                         'country' => $this->location_country,
                         'state' => $this->location_state,
@@ -58,8 +58,8 @@ class RealEstatePost extends JsonResource
                         'address_line_2' => $this->location_address_line_2,
                         'coordinates' => $this->location_coordinates,
                     ],
-                    'contact' => $this->contact,
-                    'service' => $this->services,
+                    'contact' => new Contact($this->contact),
+                    'service' => new ServiceCollection($this->services),
                     'status' => $this->status,
                     'created_at' => $this->created_at,
                     'updated_at' => $this->updated_at
