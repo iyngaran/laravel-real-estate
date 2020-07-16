@@ -185,7 +185,7 @@ class RealEstateData extends DataTransferObject
             $serviceList =  Service::whereIn('id', $service_ids)->get();
         }
 
-        $real_estate_for = App::make(CategoryRepositoryInterface::class)->findByName($request->input('data.attributes.real_estate_for.name'));
+        $real_estate_for = App::make(CategoryRepositoryInterface::class)->findByName($request->input('data.attributes.real_estate_for'));
 
         return  (
             new self(
