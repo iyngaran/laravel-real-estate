@@ -9,7 +9,7 @@ use Iyngaran\RealEstate\Models\RealEstatePost;
 
 class UpdateRealEstatePostAction
 {
-    public function execute(int $id, array $attributes): RealEstatePost
+    public function execute(array $attributes, int $id): RealEstatePost
     {
         $realEstatePost = RealEstatePost::find($id);
         if (!$realEstatePost) {

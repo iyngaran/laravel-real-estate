@@ -56,7 +56,7 @@ class RealEstatePost extends JsonResource
                         'city' => $this->location_city,
                         'address_line_1' => $this->location_address_line_1,
                         'address_line_2' => $this->location_address_line_2,
-                        'coordinates' => json_decode($this->location_coordinates),
+                        'coordinates' => json_encode($this->location_coordinates),
                     ],
                     'contact' => $this->contact,
                     'service' => $this->services,

@@ -4,6 +4,7 @@
 namespace Iyngaran\RealEstate\DataTransferObjects;
 
 use Illuminate\Support\Facades\App;
+use Iyngaran\Category\Repositories\CategoryRepositoryInterface;
 use Iyngaran\RealEstate\Actions\CreateContactAction;
 use Iyngaran\RealEstate\Models\Service;
 use Iyngaran\RealEstate\Repositories\Contact\ContactRepositoryInterface;
@@ -174,7 +175,7 @@ class RealEstateData extends DataTransferObject
     {
         $contact = null;
         $serviceList = null;
-        //$contact = App::make(ContactRepositoryInterface::class)->findByEmail($attributes['email']);
+
         if (!$contact = Contact::find($request->input('data.attributes.contact.email'))) {
                 $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request));
         }
@@ -184,11 +185,13 @@ class RealEstateData extends DataTransferObject
             $serviceList =  Service::whereIn('id', $service_ids)->get();
         }
 
+        $real_estate_for = App::make(CategoryRepositoryInterface::class)->findByName($request->input('data.attributes.real_estate_for.name'));
+
         return  (
             new self(
                 [
                         'title' => ucfirst($request->input('data.attributes.title')),
-                        'realEstateFor' => $request->input('data.attributes.real_estate_for'),
+                        'realEstateFor' => $real_estate_for,
                         'condition' => $request->input('data.attributes.condition'),
                         'country' => $request->input('data.attributes.location.country'),
                         'state' => $request->input('data.attributes.location.state'),

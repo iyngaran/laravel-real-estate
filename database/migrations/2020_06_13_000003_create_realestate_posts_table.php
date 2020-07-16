@@ -23,7 +23,7 @@ class CreateRealestatePostsTable extends Migration
             $table->string('location_city', 55)->nullable(true);
             $table->string('location_address_line_1');
             $table->string('location_address_line_2')->nullable(true);
-            $table->string('location_coordinates',100);
+            $table->string('location_coordinates',150);
             $table->string('short_description')->nullable(true);
             $table->text('detail_description')->nullable(true);
             $table->smallInteger('number_of_bedrooms')->nullable(true);
