@@ -46,7 +46,10 @@ class CreateRealEstatePostAction
             $realEstatePost->contact()->associate($attributes['contact']);
             $realEstatePost->category()->associate($attributes['category']);
             $realEstatePost->subCategory()->associate($attributes['subCategory']);
-            $realEstatePost = (new AttachServicesAction())->execute($realEstatePost, $attributes['services']);
+            if ($attributes['services']) {
+                $realEstatePost = (new AttachServicesAction())->execute($realEstatePost, $attributes['services']);
+            }
+
         }
 
         return $realEstatePost;
