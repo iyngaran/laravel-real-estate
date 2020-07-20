@@ -16,7 +16,7 @@ use Iyngaran\RealEstate\Http\Resources\RealEstatePost;
 use Iyngaran\RealEstate\Http\Resources\RealEstatePostCollection;
 use Iyngaran\RealEstate\Repositories\RealEstate\RealEstateRepositoryInterface;
 
-class RealestateController
+class RealEstateController
 {
     use ApiResponse;
 
