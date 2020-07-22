@@ -15,7 +15,7 @@ $factory->define(RealEstatePost::class, function (Faker $faker) {
 
     return [
         'title' => ucfirst($faker->sentence),
-        'real_estate_for' => factory(\Iyngaran\Category\Models\Category::class),
+        'real_estate_for' => $faker->randomElement([RealEstatePost::FOR_RENT,RealEstatePost::FOR_SALE]),
         'condition' => $faker->randomElement([RealEstatePost::CONDITION_NEW,RealEstatePost::CONDITION_USED]),
         'location_country' => $faker->countryISOAlpha3,
         'location_state' => $faker->state,
