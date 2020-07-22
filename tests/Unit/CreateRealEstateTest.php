@@ -37,7 +37,7 @@ class CreateRealEstateTest extends TestCase
         $real_estate = RealEstatePost::create(
             [
                 'title' => $faker->word(),
-                'real_estate_for' => factory(\Iyngaran\Category\Models\Category::class)->create(),
+                'real_estate_for' => $faker->randomElement([RealEstatePost::FOR_RENT,RealEstatePost::FOR_SALE]),
                 'condition' => $faker->randomElement([RealEstatePost::CONDITION_NEW,RealEstatePost::CONDITION_USED]),
                 'location_country' => $faker->country,
                 'location_state' => $faker->state,

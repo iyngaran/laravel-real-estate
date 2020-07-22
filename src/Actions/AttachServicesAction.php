@@ -14,7 +14,6 @@ class AttachServicesAction
     {
         $newServiceIds = $services->pluck('id');
         $realEstatePost->services()->sync($newServiceIds);
-        //dd($realEstatePost->services()->allRelatedIds());
         return $realEstatePost;
     }
 }

@@ -27,7 +27,7 @@ class CreateRealEstatePostActionTest extends TestCase
         $faker = \Faker\Factory::create();
         $contact = factory(\Iyngaran\RealEstate\Models\Contact::class)->create();
         $services = factory(Service::class, 5)->create();
-        $realEstateFor = factory(\Iyngaran\Category\Models\Category::class)->create();
+
         $category = factory(\Iyngaran\Category\Models\Category::class)->create();
         $subCategory = factory(\Iyngaran\Category\Models\Category::class)->create();
 
@@ -37,7 +37,7 @@ class CreateRealEstatePostActionTest extends TestCase
 
         $realEstatePostData = [
             'title' => $faker->word(),
-            'realEstateFor' => $realEstateFor,
+            'realEstateFor' => $faker->randomElement([RealEstatePost::FOR_RENT,RealEstatePost::FOR_SALE]),
             'condition' => $faker->randomElement([RealEstatePost::CONDITION_NEW,RealEstatePost::CONDITION_USED]),
             'country' => $faker->country,
             'state' => $faker->state,
@@ -74,8 +74,6 @@ class CreateRealEstatePostActionTest extends TestCase
 
         $this->assertNotNull($realEstatePost->id);
         $this->assertEquals(1, RealEstatePost::count());
-        $this->assertEquals($realEstateFor->name, $realEstatePost->postFor->name);
-        $this->assertEquals($realEstateFor->id, $realEstatePost->real_estate_for);
         $this->assertEquals($category->name, $realEstatePost->category->name);
         $this->assertEquals($category->id, $realEstatePost->property_category);
         $this->assertEquals($subCategory->name, $realEstatePost->subCategory->name);

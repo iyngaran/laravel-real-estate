@@ -19,6 +19,7 @@ class UpdateRealEstatePostAction
         $realEstatePost->update(
             [
                 'title' => $attributes['title'],
+                'real_estate_for' => $attributes['realEstateFor'],
                 'condition' => $attributes['condition'],
                 'location_country' => $attributes['country'],
                 'location_state' => $attributes['state'],
@@ -48,10 +49,19 @@ class UpdateRealEstatePostAction
         );
 
         if ($realEstatePost) {
-            $realEstatePost->postFor()->associate($attributes['realEstateFor']);
-            $realEstatePost->contact()->associate($attributes['contact']);
-            $realEstatePost->category()->associate($attributes['category']);
-            $realEstatePost->subCategory()->associate($attributes['subCategory']);
+
+            if ($attributes['contact']) {
+                $realEstatePost->contact()->associate($attributes['contact']);
+            }
+
+            if ($attributes['category']) {
+                $realEstatePost->category()->associate($attributes['category']);
+            }
+
+            if ($attributes['subCategory']) {
+                $realEstatePost->subCategory()->associate($attributes['subCategory']);
+            }
+
             $realEstatePost = (new AttachServicesAction())->execute($realEstatePost, $attributes['services']);
         }
 

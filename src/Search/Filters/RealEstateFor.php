@@ -17,8 +17,6 @@ class RealEstateFor implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        return $builder->whereHas('postFor', function ($builder) use($value) {
-            $builder->where('name',$value);
-        });
+        return $builder->where('real_estate_for',$value);
     }
 }

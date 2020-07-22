@@ -19,7 +19,7 @@ class RealEstatePost extends JsonResource
                 'attributes' => [
                     'id' => $this->id,
                     'title' => $this->title,
-                    'real_estate_for' => $this->postFor,
+                    'real_estate_for' => $this->real_estate_for,
                     'condition' => $this->condition,
                     'short_description' => $this->short_description,
                     'detail_description' => $this->detail_description,

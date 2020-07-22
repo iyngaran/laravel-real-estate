@@ -28,6 +28,7 @@ class UpdateRealEstateTest extends TestCase
         $contact = factory(Contact::class)->create();
         $services = factory(Service::class, 5)->create();
         factory(\Iyngaran\Category\Models\Category::class)->create();
+
         $subCategory = factory(\Iyngaran\Category\Models\Category::class)->create();
         $real_estate = factory(\Iyngaran\RealEstate\Models\RealEstatePost::class)->create();
 
@@ -38,7 +39,7 @@ class UpdateRealEstateTest extends TestCase
         $real_estate->update(
             [
                 'title' => $faker->word(),
-                'real_estate_for' => factory(\Iyngaran\Category\Models\Category::class)->create(),
+                'real_estate_for' => $faker->randomElement([RealEstatePost::FOR_RENT,RealEstatePost::FOR_SALE]),
                 'condition' => $faker->randomElement([RealEstatePost::CONDITION_NEW,RealEstatePost::CONDITION_USED]),
                 'location_country' => $faker->country,
                 'location_state' => $faker->state,

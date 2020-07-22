@@ -14,6 +14,9 @@ class RealEstatePost extends Model
     const YES = 1;
     const NO = 2;
 
+    const FOR_SALE = 'for-sale';
+    const FOR_RENT = 'for-rent';
+
     const CONDITION_USED = 1;
     const CONDITION_NEW = 2;
 
@@ -39,14 +42,6 @@ class RealEstatePost extends Model
     public function contact()
     {
         return $this->belongsTo(Contact::class, "contact_id");
-    }
-
-    /*
-     * Sale / Rent
-     */
-    public function postFor()
-    {
-        return $this->belongsTo(\Iyngaran\Category\Models\Category::class, "real_estate_for");
     }
 
     public function category()

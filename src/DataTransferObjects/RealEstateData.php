@@ -22,7 +22,7 @@ class RealEstateData extends DataTransferObject
     public $title;
 
     /**
-     * @var \Iyngaran\Category\Models\Category
+     * @var string
      */
     public $realEstateFor;
 
@@ -177,53 +177,53 @@ class RealEstateData extends DataTransferObject
         $serviceList = null;
 
         if (!$contact = Contact::find($request->input('data.attributes.contact.email'))) {
-                $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request));
+            $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request));
         }
 
         if ($services = $request->input('data.attributes.service.ids')) {
             $service_ids = array_column($services, 'id');
-            $serviceList =  Service::whereIn('id', $service_ids)->get();
+            $serviceList = Service::whereIn('id', $service_ids)->get();
         }
 
-        $real_estate_for = App::make(CategoryRepositoryInterface::class)->findByName($request->input('data.attributes.real_estate_for'));
+        $category = App::make(CategoryRepositoryInterface::class)->find($request->input('data.attributes.category.id'));
+        $subCategory = App::make(CategoryRepositoryInterface::class)->find($request->input('data.attributes.sub_category.id'));
 
-        return  (
-            new self(
-                [
-                        'title' => ucfirst($request->input('data.attributes.title')),
-                        'realEstateFor' => $real_estate_for,
-                        'condition' => $request->input('data.attributes.condition'),
-                        'country' => $request->input('data.attributes.location.country'),
-                        'state' => $request->input('data.attributes.location.state'),
-                        'city' => $request->input('data.attributes.location.city'),
-                        'addressLine_1' => $request->input('data.attributes.location.address_line_1'),
-                        'addressLine_2' => $request->input('data.attributes.location.address_line_2'),
-                        'coordinates' => $request->input('data.attributes.location.coordinates'),
-                        'shortDescription' => $request->input('data.attributes.short_description'),
-                        'detailDescription' => $request->input('data.attributes.detail_description'),
-                        'numberOfBedrooms' => (int)$request->input('data.attributes.number_of_bedrooms'),
-                        'numberOfBathrooms' => (int)$request->input('data.attributes.number_of_bathrooms'),
-                        'size' => (float)$request->input('data.attributes.size.size'),
-                        'sizeUnit' => $request->input('data.attributes.size.unit'),
-                        'age' => (float)$request->input('data.attributes.age.age'),
-                        'ageUnit' => $request->input('data.attributes.age.unit'),
-                        'rent' => (float)$request->input('data.attributes.rent.rent'),
-                        'rentUnit' => $request->input('data.attributes.rent.unit'),
-                        'minLeaseTerm' => (float)$request->input('data.attributes.min_lease_term.term'),
-                        'minLeaseTermUnit' => $request->input('data.attributes.min_lease_term.unit'),
-                        'advancedPayment' => (double)$request->input('data.attributes.advanced_payment.payment'),
-                        'advancedPaymentUnit' => $request->input('data.attributes.advanced_payment.unit'),
-                        'utilityBillPaymentsIncluded' => (int)$request->input('data.attributes.utility_bill_payments_included'),
-                        'negotiable' => (int)$request->input('data.attributes.negotiable'),
-                        'numberOfParkingSlots' => (int)$request->input('data.attributes.number_of_parking_slots'),
-                        'category' => Category::find($request->input('data.attributes.category.id')),
-                        'subCategory' => Category::find($request->input('data.attributes.sub_category.id')),
-                        'contact' => $contact,
-                        'services' => $serviceList,
-                        'status' => $request->input('data.attributes.status')
-                ]
-            )
-        )->toArray();
+
+        return ( new self(
+            [
+                'title' => ucfirst($request->input('data.attributes.title')),
+                'realEstateFor' => $request->input('data.attributes.real_estate_for'),
+                'condition' => $request->input('data.attributes.condition'),
+                'country' => $request->input('data.attributes.location.country'),
+                'state' => $request->input('data.attributes.location.state'),
+                'city' => $request->input('data.attributes.location.city'),
+                'addressLine_1' => $request->input('data.attributes.location.address_line_1'),
+                'addressLine_2' => $request->input('data.attributes.location.address_line_2'),
+                'coordinates' => $request->input('data.attributes.location.coordinates'),
+                'shortDescription' => $request->input('data.attributes.short_description'),
+                'detailDescription' => $request->input('data.attributes.detail_description'),
+                'numberOfBedrooms' => (int)$request->input('data.attributes.number_of_bedrooms'),
+                'numberOfBathrooms' => (int)$request->input('data.attributes.number_of_bathrooms'),
+                'size' => (float)$request->input('data.attributes.size.size'),
+                'sizeUnit' => $request->input('data.attributes.size.unit'),
+                'age' => (float)$request->input('data.attributes.age.age'),
+                'ageUnit' => $request->input('data.attributes.age.unit'),
+                'rent' => (float)$request->input('data.attributes.rent.rent'),
+                'rentUnit' => $request->input('data.attributes.rent.unit'),
+                'minLeaseTerm' => (float)$request->input('data.attributes.min_lease_term.term'),
+                'minLeaseTermUnit' => $request->input('data.attributes.min_lease_term.unit'),
+                'advancedPayment' => (double)$request->input('data.attributes.advanced_payment.payment'),
+                'advancedPaymentUnit' => $request->input('data.attributes.advanced_payment.unit'),
+                'utilityBillPaymentsIncluded' => (int)$request->input('data.attributes.utility_bill_payments_included'),
+                'negotiable' => (int)$request->input('data.attributes.negotiable'),
+                'numberOfParkingSlots' => (int)$request->input('data.attributes.number_of_parking_slots'),
+                'category' => $category,
+                'subCategory' => $subCategory,
+                'contact' => $contact,
+                'services' => $serviceList,
+                'status' => $request->input('data.attributes.status')
+            ]
+        ))->toArray();
     }
 
 }
