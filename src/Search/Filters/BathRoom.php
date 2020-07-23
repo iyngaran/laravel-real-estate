@@ -5,7 +5,7 @@ namespace Iyngaran\RealEstate\Search\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class Status implements Filter
+class BathRoom implements Filter
 {
 
     /**
@@ -17,6 +17,6 @@ class Status implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        return $builder->where('status', $value);
+        return $builder->where('number_of_bathrooms', $value);
     }
 }

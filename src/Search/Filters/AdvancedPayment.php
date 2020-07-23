@@ -5,7 +5,7 @@ namespace Iyngaran\RealEstate\Search\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class Status implements Filter
+class AdvancedPayment implements Filter
 {
 
     /**
@@ -17,6 +17,9 @@ class Status implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        return $builder->where('status', $value);
+        $builder->where('advanced_payment', "<=", $value['payment'])
+            ->where('advanced_payment_unit', $value['unit']);
+
+        return $builder;
     }
 }

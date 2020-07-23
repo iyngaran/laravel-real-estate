@@ -24,9 +24,11 @@ class RealEstateSearch extends Search
             $perPage = $reqPerPage;
         }
 
-        Paginator::currentPageResolver(function () use ($currentPage) {
-            return $currentPage;
-        });
+        Paginator::currentPageResolver(
+            function () use ($currentPage) {
+                return $currentPage;
+            }
+        );
 
         return $this->apply($filters, new RealEstatePost())->paginate($perPage);
     }

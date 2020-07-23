@@ -97,7 +97,7 @@ class RealEstateController
     public function destroy($id): JsonResponse
     {
         return $this->deletedResponse(
-             (new DeleteRealEstatePostAction())->execute($id)
+            (new DeleteRealEstatePostAction())->execute($id)
         );
     }
 
