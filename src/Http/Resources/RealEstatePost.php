@@ -59,7 +59,7 @@ class RealEstatePost extends JsonResource
                         'coordinates' => $this->location_coordinates,
                     ],
                     'contact' => new Contact($this->contact),
-                    'service' => new ServiceCollection($this->services),
+                    'services' => new ServiceCollection($this->services),
                     'status' => $this->status,
                     'created_at' => $this->created_at,
                     'updated_at' => $this->updated_at

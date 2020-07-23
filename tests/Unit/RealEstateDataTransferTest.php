@@ -36,7 +36,7 @@ class RealEstateDataTransferTest extends TestCase
         $serviceIds = [];
         if ($services) {
             foreach($services as $service) {
-                array_push($serviceIds, ['id'=>$service->id]);
+                array_push($serviceIds, $service->id);
             }
         }
 
@@ -99,9 +99,7 @@ class RealEstateDataTransferTest extends TestCase
                         'phone_numbers' => $faker->phoneNumber.",".$faker->phoneNumber,
                         'email' => $faker->email
                     ],
-                    'service' => [
-                        'ids' => $serviceIds
-                    ]
+                    'service_ids' => $serviceIds
                 ]
             ]
         ];

@@ -98,9 +98,7 @@ class CreateRealEstateTest extends TestCase
                         'phone_numbers' => $faker->phoneNumber.",".$faker->phoneNumber,
                         'email' => $faker->email
                     ],
-                    'service' => [
-                        'ids' => $serviceIds
-                    ],
+                    'service_ids' => $serviceIds,
                     'status' => $faker->randomElement(['Published','Drafted','Pending']),
                 ]
             ]

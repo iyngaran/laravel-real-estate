@@ -180,9 +180,8 @@ class RealEstateData extends DataTransferObject
             $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request));
         }
 
-        if ($services = $request->input('data.attributes.service.ids')) {
-            $service_ids = array_column($services, 'id');
-            $serviceList = Service::whereIn('id', $service_ids)->get();
+        if ($services = $request->input('data.attributes.service_ids')) {
+            $serviceList = Service::whereIn('id', $services)->get();
         }
 
         $category = App::make(CategoryRepositoryInterface::class)->find($request->input('data.attributes.category.id'));
