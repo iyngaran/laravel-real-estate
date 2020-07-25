@@ -29,5 +29,8 @@ return [
     'currencies' => [
         'LKR' => 'RS',
         'USD' => '$'
+    ],
+    'base_currency' => [
+        'LKR' => 'RS'
     ]
 ];

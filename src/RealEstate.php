@@ -38,4 +38,9 @@ class RealEstate
             'currencies' => config('iyngaran.realestate.currencies')
         ];
     }
+
+    public function baseCurrency()
+    {
+        return config('iyngaran.realestate.base_currency');
+    }
 }
