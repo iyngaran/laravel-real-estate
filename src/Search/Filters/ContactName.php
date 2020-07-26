@@ -5,7 +5,7 @@ namespace Iyngaran\RealEstate\Search\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class Rent implements Filter
+class ContactName implements Filter
 {
 
     /**
@@ -17,9 +17,11 @@ class Rent implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        $builder->where('rent', $value['rent'])
-            ->where('rent_unit', $value['unit']);
-
+        $builder->whereHas(
+            'contact', function ($builder) use ($value) {
+                $builder->where('name', 'like', $value."%");
+            }
+        );
         return $builder;
     }
 }

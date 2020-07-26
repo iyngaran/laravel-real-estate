@@ -35,9 +35,9 @@ class RealEstatePost extends JsonResource
                         'unit' => $this->age_unit,
                     ],
                     'base_currency' => RealEstateFacade::baseCurrency(),
-                    'rent' => [
-                        'rent' => $this->rent,
-                        'unit' => $this->rent_unit
+                    'price' => [
+                        'price' => $this->price,
+                        'unit' => $this->price_unit
                     ],
                     'min_lease_term' => [
                         'term' => $this->min_lease_term,

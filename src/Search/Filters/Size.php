@@ -17,9 +17,7 @@ class Size implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        $builder->where('size', $value['size'])
-            ->where('size_unit', $value['unit']);
-
+        $builder->where('size', $value);
         return $builder;
     }
 }

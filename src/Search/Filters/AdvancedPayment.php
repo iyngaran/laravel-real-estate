@@ -17,9 +17,7 @@ class AdvancedPayment implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        $builder->where('advanced_payment', "<=", $value['payment'])
-            ->where('advanced_payment_unit', $value['unit']);
-
+        $builder->where('advanced_payment', "<=", $value);
         return $builder;
     }
 }

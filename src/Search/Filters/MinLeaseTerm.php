@@ -17,9 +17,7 @@ class MinLeaseTerm implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        $builder->where('min_lease_term', "<=", $value['term'])
-            ->where('min_lease_term_unit', $value['unit']);
-
+        $builder->where('min_lease_term', "<=", $value);
         return $builder;
     }
 }

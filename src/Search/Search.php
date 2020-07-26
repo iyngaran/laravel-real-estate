@@ -18,11 +18,12 @@ class Search
     private static function applyDecoratorsFromRequest(Request $request, Builder $query)
     {
         foreach ($request->all() as $filterName => $value) {
+            if (isset($value) && !empty($value)) {
+                $decorator = static::createFilterDecorator($filterName);
 
-            $decorator = static::createFilterDecorator($filterName);
-
-            if (static::isValidDecorator($decorator)) {
-                $query = $decorator::apply($query, $value);
+                if (static::isValidDecorator($decorator)) {
+                    $query = $decorator::apply($query, $value);
+                }
             }
 
         }

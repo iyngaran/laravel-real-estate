@@ -62,8 +62,8 @@ class RealEstateDataTransferTest extends TestCase
                         'age' => $faker->randomNumber(1),
                         'unit' => $age_unit,
                     ],
-                    'rent' => [
-                        'rent' => $faker->randomNumber(2),
+                    'price' => [
+                        'price' => $faker->randomNumber(2),
                         'unit' => $currency
                     ],
                     'min_lease_term' => [

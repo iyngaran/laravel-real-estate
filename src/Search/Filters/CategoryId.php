@@ -5,7 +5,7 @@ namespace Iyngaran\RealEstate\Search\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class Age implements Filter
+class CategoryId implements Filter
 {
 
     /**
@@ -17,7 +17,7 @@ class Age implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        $builder->where('age', $value);
+        $builder->where('property_category', $value);
         return $builder;
     }
 }

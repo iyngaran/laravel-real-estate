@@ -20,6 +20,7 @@ class RealEstateSearch extends Search
         $currentPage = $filters->input('page');
         $reqPerPage = $filters->input('per-page');
 
+
         if ($reqPerPage) {
             $perPage = $reqPerPage;
         }

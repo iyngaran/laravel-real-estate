@@ -104,12 +104,12 @@ class RealEstateData extends DataTransferObject
     /**
      * @var float|null
      */
-    public $rent;
+    public $price;
 
     /**
      * @var string|null
      */
-    public $rentUnit;
+    public $priceUnit;
 
     /**
      * @var float|null
@@ -207,8 +207,8 @@ class RealEstateData extends DataTransferObject
                 'sizeUnit' => $request->input('data.attributes.size.unit'),
                 'age' => (float)$request->input('data.attributes.age.age'),
                 'ageUnit' => $request->input('data.attributes.age.unit'),
-                'rent' => (float)$request->input('data.attributes.rent.rent'),
-                'rentUnit' => $request->input('data.attributes.rent.unit'),
+                'price' => (float)$request->input('data.attributes.price.price'),
+                'priceUnit' => $request->input('data.attributes.price.unit'),
                 'minLeaseTerm' => (float)$request->input('data.attributes.min_lease_term.term'),
                 'minLeaseTermUnit' => $request->input('data.attributes.min_lease_term.unit'),
                 'advancedPayment' => (double)$request->input('data.attributes.advanced_payment.payment'),
