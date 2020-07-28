@@ -132,12 +132,12 @@ class RealEstateData extends DataTransferObject
     public $advancedPaymentUnit;
 
     /**
-     * @var integer|null
+     * @var string|null
      */
     public $utilityBillPaymentsIncluded;
 
     /**
-     * @var integer|null
+     * @var string|null
      */
     public $negotiable;
 
@@ -213,8 +213,8 @@ class RealEstateData extends DataTransferObject
                 'minLeaseTermUnit' => $request->input('data.attributes.min_lease_term.unit'),
                 'advancedPayment' => (double)$request->input('data.attributes.advanced_payment.payment'),
                 'advancedPaymentUnit' => $request->input('data.attributes.advanced_payment.unit'),
-                'utilityBillPaymentsIncluded' => (int)$request->input('data.attributes.utility_bill_payments_included'),
-                'negotiable' => (int)$request->input('data.attributes.negotiable'),
+                'utilityBillPaymentsIncluded' => $request->input('data.attributes.utility_bill_payments_included'),
+                'negotiable' => $request->input('data.attributes.negotiable'),
                 'numberOfParkingSlots' => (int)$request->input('data.attributes.number_of_parking_slots'),
                 'category' => $category,
                 'subCategory' => $subCategory,

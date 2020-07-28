@@ -11,8 +11,8 @@ class RealEstatePost extends Model
     protected $guarded = [];
     protected $table = 'real_estate_posts';
 
-    const YES = 1;
-    const NO = 2;
+    const YES = 'Yes';
+    const NO = 'No';
 
     const FOR_SALE = 'for-sale';
     const FOR_RENT = 'for-rent';
@@ -46,12 +46,12 @@ class RealEstatePost extends Model
 
     public function category()
     {
-        return $this->belongsTo(\Iyngaran\Category\Models\Category::class, "property_category");
+        return $this->belongsTo(\Iyngaran\Category\Models\Category::class, "property_category", "id");
     }
 
     public function subCategory()
     {
-        return $this->belongsTo(\Iyngaran\Category\Models\Category::class, "property_sub_category");
+        return $this->belongsTo(\Iyngaran\Category\Models\Category::class, "property_sub_category", "id");
     }
 
 }

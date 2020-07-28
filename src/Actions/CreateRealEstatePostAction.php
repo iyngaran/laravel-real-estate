@@ -4,6 +4,7 @@
 namespace Iyngaran\RealEstate\Actions;
 
 
+use Illuminate\Support\Facades\Log;
 use Iyngaran\RealEstate\Models\RealEstatePost;
 
 class CreateRealEstatePostAction
@@ -45,15 +46,15 @@ class CreateRealEstatePostAction
         if ($realEstatePost) {
 
             if ($attributes['contact']) {
-                $realEstatePost->contact()->associate($attributes['contact']);
+                $realEstatePost->contact()->associate($attributes['contact'])->save();
             }
 
             if ($attributes['category']) {
-                $realEstatePost->category()->associate($attributes['category']);
+                $realEstatePost->category()->associate($attributes['category'])->save();
             }
 
             if ($attributes['subCategory']) {
-                $realEstatePost->subCategory()->associate($attributes['subCategory']);
+                $realEstatePost->subCategory()->associate($attributes['subCategory'])->save();
             }
 
             if ($attributes['services']) {
