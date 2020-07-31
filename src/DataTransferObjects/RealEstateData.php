@@ -171,6 +171,16 @@ class RealEstateData extends DataTransferObject
      */
     public $status;
 
+    /**
+     * @var []|null
+     */
+    public $defaultImage;
+
+    /**
+     * @var []\null
+     */
+    public $images;
+
     public static function fromRequest(Request $request): array
     {
         $contact = null;
@@ -220,6 +230,8 @@ class RealEstateData extends DataTransferObject
                 'subCategory' => $subCategory,
                 'contact' => $contact,
                 'services' => $serviceList,
+                'defaultImage' => $request->input('data.attributes.default_image'),
+                'images' => $request->input('data.attributes.images'),
                 'status' => $request->input('data.attributes.status')
             ]
         ))->toArray();

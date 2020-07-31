@@ -50,4 +50,28 @@ $factory->define(RealEstatePost::class, function (Faker $faker) {
 $factory->afterCreating(RealEstatePost::class, function ($row, $faker) {
     $services = factory(\Iyngaran\RealEstate\Models\Service::class, 5)->create();
     $row->services()->saveMany($services);
+
+    $row->defaultImage()->create(
+        [
+            'url'=> $faker->word.'.png',
+            'is_default'=>'Yes',
+            'display_order'=>1
+        ]
+    );
+
+    $row->images()->createMany(
+        [
+            [
+                'url'=> $faker->word.'.png',
+                'display_order'=>2
+            ],
+            [
+                'url'=> $faker->word.'.png',
+                'display_order'=>3
+            ]
+
+        ]
+    );
+
+
 });

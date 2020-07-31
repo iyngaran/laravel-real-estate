@@ -54,4 +54,14 @@ class RealEstatePost extends Model
         return $this->belongsTo(\Iyngaran\Category\Models\Category::class, "property_sub_category", "id");
     }
 
+    public function defaultImage()
+    {
+        return $this->morphOne(Image::class, 'imageable')->where('is_default', 'Yes');
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
 }

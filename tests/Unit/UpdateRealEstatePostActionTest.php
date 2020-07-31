@@ -37,6 +37,12 @@ class UpdateRealEstatePostActionTest extends TestCase
         $age_unit = $faker->randomElement(['Months', 'Years']);
         $currency = $faker->randomElement(['LKR' => 'RS', 'USD' => '$']);
 
+        $default_image = ['url'=>'test1.png','display_order'=>1];
+        $images = [
+            ['url'=>'test2.png','display_order'=>2],
+            ['url'=>'test3.png','display_order'=>3]
+        ];
+
         $realEstatePostData = [
             'title' => $faker->word(),
             'realEstateFor' => $faker->randomElement([RealEstatePost::FOR_RENT,RealEstatePost::FOR_SALE]),
@@ -69,6 +75,8 @@ class UpdateRealEstatePostActionTest extends TestCase
             'subCategory' => $subCategory,
             'services' => $services,
             'status' => $faker->randomElement(['Published','Drafted','Pending']),
+            'defaultImage' => $default_image,
+            'images' => $images
         ];
 
         $updateRealEstatePostAction =  new UpdateRealEstatePostAction();

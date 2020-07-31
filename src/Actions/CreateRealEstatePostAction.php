@@ -61,6 +61,14 @@ class CreateRealEstatePostAction
                 $realEstatePost = (new AttachServicesAction())->execute($realEstatePost, $attributes['services']);
             }
 
+            if ($attributes['defaultImage']) {
+                $realEstatePost = (new AttachDefaultImageAction())->execute($realEstatePost, $attributes['defaultImage']);
+            }
+
+            if ($attributes['images']) {
+                $realEstatePost = (new AttachImagesAction())->execute($realEstatePost, $attributes['images']);
+            }
+
         }
 
         return $realEstatePost;

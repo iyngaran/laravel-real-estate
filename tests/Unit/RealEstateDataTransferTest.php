@@ -44,6 +44,12 @@ class RealEstateDataTransferTest extends TestCase
         $age_unit = $faker->randomElement(['Months', 'Years']);
         $currency = $faker->randomElement(['LKR' => 'RS', 'USD' => '$']);
 
+        $default_image = ['url'=>'test1.png','display_order'=>1];
+        $images = [
+            ['url'=>'test2.png','display_order'=>2],
+            ['url'=>'test3.png','display_order'=>3]
+        ];
+
         $data = [
             'data' => [
                 'attributes' => [
@@ -99,7 +105,9 @@ class RealEstateDataTransferTest extends TestCase
                         'phone_numbers' => $faker->phoneNumber.",".$faker->phoneNumber,
                         'email' => $faker->email
                     ],
-                    'service_ids' => $serviceIds
+                    'service_ids' => $serviceIds,
+                    'defaultImage' => $default_image,
+                    'images' => $images
                 ]
             ]
         ];
