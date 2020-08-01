@@ -147,17 +147,17 @@ class RealEstateData extends DataTransferObject
     public $numberOfParkingSlots;
 
     /**
-     * @var \Iyngaran\Category\Models\Category
+     * @var \Iyngaran\Category\Models\Category|null
      */
     public $category;
 
     /**
-     * @var \Iyngaran\Category\Models\Category
+     * @var \Iyngaran\Category\Models\Category|null
      */
     public $subCategory;
 
     /**
-     * @var \Iyngaran\RealEstate\Models\Contact
+     * @var \Iyngaran\RealEstate\Models\Contact|null
      */
     public $contact;
 
@@ -186,16 +186,27 @@ class RealEstateData extends DataTransferObject
         $contact = null;
         $serviceList = null;
 
-        if (!$contact = Contact::find($request->input('data.attributes.contact.email'))) {
-            $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request));
+        if ($request->input('data.attributes.contact.email')) {
+            if (!$contact = Contact::find($request->input('data.attributes.contact.email'))) {
+                $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request));
+            }
         }
+
 
         if ($services = $request->input('data.attributes.service_ids')) {
             $serviceList = Service::whereIn('id', $services)->get();
         }
 
-        $category = App::make(CategoryRepositoryInterface::class)->find($request->input('data.attributes.category.id'));
-        $subCategory = App::make(CategoryRepositoryInterface::class)->find($request->input('data.attributes.sub_category.id'));
+        $category = null;
+        $subCategory = null;
+
+        if ($request->input('data.attributes.category.id')) {
+            $category = App::make(CategoryRepositoryInterface::class)->find($request->input('data.attributes.category.id'));
+        }
+
+        if ($request->input('data.attributes.sub_category.id')) {
+            $subCategory = App::make(CategoryRepositoryInterface::class)->find($request->input('data.attributes.sub_category.id'));
+        }
 
 
         return ( new self(

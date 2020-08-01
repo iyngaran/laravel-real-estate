@@ -32,7 +32,7 @@ class CreateRealestatePostsTable extends Migration
             $table->string('size_unit', 20)->nullable(true);
             $table->float('age')->nullable(true);
             $table->string('age_unit',20)->nullable(true);
-            $table->float('price')->nullable(true);
+            $table->double('price')->nullable(true);
             $table->string('price_unit',10)->nullable(true);
             $table->float('min_lease_term')->nullable(true);
             $table->string('min_lease_term_unit',10)->nullable(true);

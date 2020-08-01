@@ -63,6 +63,7 @@ class RealEstatePost extends JsonResource
                     'contact' => new Contact($this->contact),
                     'services' => new ServiceCollection($this->services),
                     'status' => $this->status,
+                    'default_image' => isset($this->defaultImage)?$this->defaultImage->url:'default.png',
                     'created_at' => $this->created_at,
                     'updated_at' => $this->updated_at
                 ]

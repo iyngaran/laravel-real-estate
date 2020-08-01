@@ -13,11 +13,13 @@ class AttachDefaultImageAction
 {
     public function execute(RealEstatePost $realEstatePost, array $image): RealEstatePost
     {
-        if ($realEstatePost->defaultImage()->exists()) {
-            $realEstatePost->defaultImage->delete();
+        if(isset($image['url'])) {
+            if ($realEstatePost->defaultImage()->exists()) {
+                $realEstatePost->defaultImage->delete();
+            }
+            $image['is_default'] = 'Yes';
+            $realEstatePost->defaultImage()->create($image);
         }
-        $image['is_default'] = 'Yes';
-        $realEstatePost->defaultImage()->create($image);
         return $realEstatePost;
     }
 }
