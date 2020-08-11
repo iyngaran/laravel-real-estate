@@ -64,6 +64,9 @@ class RealEstatePost extends JsonResource
                     'services' => new ServiceCollection($this->services),
                     'status' => $this->status,
                     'default_image' => isset($this->defaultImage)?$this->defaultImage->url:'default.png',
+                    'images' => $this->images,
+                    'published_at' => $this->updated_at->diffForHumans(),
+                    'posted_at' => $this->created_at->diffForHumans(),
                     'created_at' => $this->created_at,
                     'updated_at' => $this->updated_at
                 ]
