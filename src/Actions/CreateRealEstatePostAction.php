@@ -6,6 +6,7 @@ namespace Iyngaran\RealEstate\Actions;
 
 use Illuminate\Support\Facades\Log;
 use Iyngaran\RealEstate\Models\RealEstatePost;
+use Iyngaran\RealEstate\RealEstate;
 
 class CreateRealEstatePostAction
 {
@@ -39,7 +40,7 @@ class CreateRealEstatePostAction
                 'utility_bill_payments_included' => $attributes['utilityBillPaymentsIncluded'],
                 'negotiable' => $attributes['negotiable'],
                 'number_of_parking_slots' => $attributes['numberOfParkingSlots'],
-                'status' => $attributes['status']
+                'status' => !empty($attributes['status']) ?? RealEstate::defaultPostStatus()
             ]
         );
 

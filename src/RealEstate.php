@@ -39,6 +39,11 @@ class RealEstate
         ];
     }
 
+    public function defaultPostStatus()
+    {
+        return config('iyngaran.realestate.default_post_status');
+    }
+
     public function baseCurrency()
     {
         return config('iyngaran.realestate.base_currency');

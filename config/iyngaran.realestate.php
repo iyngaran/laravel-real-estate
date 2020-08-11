@@ -1,5 +1,6 @@
 <?php
 return [
+    'default_post_status' => 'Pending', // it will be set when create a post
     'path' => 'ads/',
     'middleware' => 'auth:api',
     'page_limit' => 30,
