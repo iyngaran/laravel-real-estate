@@ -19,30 +19,34 @@ class ContactRepositoryTest extends TestCase
         parent::setUp();
     }
 
-    /** @test */
+    /**
+     * @test 
+     */
     public function a_contact_can_be_retrieve_by_id()
     {
         $factory_contact = factory(\Iyngaran\RealEstate\Models\Contact::class)->create();
         $contactRepository = $this->app->make(ContactRepositoryInterface::class);
         $contact = $contactRepository->find($factory_contact->id);
-        $this->assertEquals($factory_contact->id,$factory_contact->id);
-        $this->assertEquals($factory_contact->name,$factory_contact->name);
-        $this->assertEquals($factory_contact->email,$factory_contact->email);
-        $this->assertEquals($factory_contact->created_at,$factory_contact->created_at);
-        $this->assertEquals($factory_contact->updated_at,$factory_contact->updated_at);
+        $this->assertEquals($factory_contact->id, $factory_contact->id);
+        $this->assertEquals($factory_contact->name, $factory_contact->name);
+        $this->assertEquals($factory_contact->email, $factory_contact->email);
+        $this->assertEquals($factory_contact->created_at, $factory_contact->created_at);
+        $this->assertEquals($factory_contact->updated_at, $factory_contact->updated_at);
     }
 
-    /** @test */
+    /**
+     * @test 
+     */
     public function a_contact_can_be_retrieve_by_title()
     {
         $factory_contact = factory(\Iyngaran\RealEstate\Models\Contact::class)->create();
         $contactRepository = $this->app->make(ContactRepositoryInterface::class);
         $contact = $contactRepository->findByEmail($factory_contact->email);
-        $this->assertEquals($factory_contact->id,$factory_contact->id);
-        $this->assertEquals($factory_contact->name,$factory_contact->name);
-        $this->assertEquals($factory_contact->email,$factory_contact->email);
-        $this->assertEquals($factory_contact->created_at,$factory_contact->created_at);
-        $this->assertEquals($factory_contact->updated_at,$factory_contact->updated_at);
+        $this->assertEquals($factory_contact->id, $factory_contact->id);
+        $this->assertEquals($factory_contact->name, $factory_contact->name);
+        $this->assertEquals($factory_contact->email, $factory_contact->email);
+        $this->assertEquals($factory_contact->created_at, $factory_contact->created_at);
+        $this->assertEquals($factory_contact->updated_at, $factory_contact->updated_at);
     }
 
 }

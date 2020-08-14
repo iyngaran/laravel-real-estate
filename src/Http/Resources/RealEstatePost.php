@@ -19,7 +19,7 @@ class RealEstatePost extends JsonResource
                 'attributes' => [
                     'id' => $this->id,
                     'title' => $this->title,
-                    'is_for' => ucwords(str_replace("-"," ",$this->real_estate_for)),
+                    'is_for' => ucwords(str_replace("-", " ", $this->real_estate_for)),
                     'real_estate_for' => $this->real_estate_for,
                     'condition' => $this->condition,
                     'short_description' => $this->short_description,

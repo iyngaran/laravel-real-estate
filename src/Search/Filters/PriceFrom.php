@@ -17,7 +17,7 @@ class PriceFrom implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        $builder->where('price',"=>", $value);
+        $builder->where('price', "=>", $value);
         return $builder;
     }
 }

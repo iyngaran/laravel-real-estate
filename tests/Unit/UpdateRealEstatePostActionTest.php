@@ -80,7 +80,7 @@ class UpdateRealEstatePostActionTest extends TestCase
         ];
 
         $updateRealEstatePostAction =  new UpdateRealEstatePostAction();
-        $updatedRealEstatePost = $updateRealEstatePostAction->execute($realEstatePostData,$factoryRealEstatePost->id);
+        $updatedRealEstatePost = $updateRealEstatePostAction->execute($realEstatePostData, $factoryRealEstatePost->id);
         $realEstatePost = $updatedRealEstatePost;
         $this->assertNotNull($realEstatePost->id);
         $this->assertEquals(1, RealEstatePost::count());

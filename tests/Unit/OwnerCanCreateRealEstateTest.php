@@ -10,7 +10,7 @@ use Iyngaran\RealEstate\Models\RealEstatePost;
 use Iyngaran\RealEstate\Models\Service;
 use Iyngaran\RealEstate\Tests\TestCase;
 
-class CreateRealEstateTest extends TestCase
+class OwnerCanCreateRealEstateTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -22,7 +22,7 @@ class CreateRealEstateTest extends TestCase
     /**
      * @test 
      */
-    public function create_a_real_estate_post()
+    public function owner_can_create_a_real_estate_post()
     {
         $faker = \Faker\Factory::create();
         $contact = factory(Contact::class)->create();
@@ -35,7 +35,7 @@ class CreateRealEstateTest extends TestCase
         $age_unit = $faker->randomElement(['Months', 'Years']);
         $currency = $faker->randomElement(['LKR' => 'RS', 'USD' => '$']);
 
-        $real_estate = RealEstatePost::create(
+        $owner->realEstates()->create(
             [
                 'title' => $faker->word(),
                 'real_estate_for' => $faker->randomElement([RealEstatePost::FOR_RENT,RealEstatePost::FOR_SALE]),
@@ -66,12 +66,11 @@ class CreateRealEstateTest extends TestCase
                 'property_category' => $subCategory->parent_id,
                 'property_sub_category' => $subCategory->id,
                 'contact_id' => $contact->id,
-                'status' => $faker->randomElement(['Published','Drafted','Pending']),
-                'owner_id' => $owner->id,
-                'owner_type' => get_class($owner),
+                'status' => $faker->randomElement(['Published','Drafted','Pending'])
             ]
         );
 
+        $real_estate = $owner->realEstates()->first();
         $real_estate->services()->attach($services);
         $this->assertEquals(1, RealEstatePost::count());
         $this->assertEquals($subCategory->parent_id, $real_estate->property_category);

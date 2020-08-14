@@ -7,6 +7,7 @@ namespace Iyngaran\RealEstate\Tests\Unit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Iyngaran\RealEstate\Actions\CreateContactAction;
 use Iyngaran\RealEstate\Models\Contact;
+use Iyngaran\RealEstate\Models\Owner;
 use Iyngaran\RealEstate\Tests\TestCase;
 
 class CreateContactActionTest extends TestCase
@@ -24,6 +25,7 @@ class CreateContactActionTest extends TestCase
     public function create_contact_action_test()
     {
         $faker = \Faker\Factory::create();
+        $owner = factory(Owner::class)->create();
 
         $contactData = [
             'name' => $faker->firstName,
@@ -32,10 +34,11 @@ class CreateContactActionTest extends TestCase
         ];
 
         $createContactAction =  new CreateContactAction();
-        $contact = $createContactAction->execute($contactData);
+        $contact = $createContactAction->execute($contactData, $owner);
 
         $this->assertNotNull($contact->id);
         $this->assertEquals(1, Contact::count());
+
     }
 
     /**
@@ -45,6 +48,7 @@ class CreateContactActionTest extends TestCase
     {
         $faker = \Faker\Factory::create();
         $contact = factory(\Iyngaran\RealEstate\Models\Contact::class)->create();
+        $owner = factory(Owner::class)->create();
 
         $contactData = [
             'name' => $faker->firstName,
@@ -53,7 +57,7 @@ class CreateContactActionTest extends TestCase
         ];
 
         $createContactAction =  new CreateContactAction();
-        $contact = $createContactAction->execute($contactData);
+        $contact = $createContactAction->execute($contactData, $owner);
 
         $this->assertNotNull($contact->id);
         $this->assertEquals(1, Contact::count());

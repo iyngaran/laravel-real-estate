@@ -12,12 +12,12 @@ use Iyngaran\RealEstate\Repositories\Contact\ContactRepositoryInterface;
 class CreateContactAction
 {
 
-    public function execute(array $attributes) : Contact
+    public function execute(array $attributes, $owner) : Contact
     {
         try {
             return App::make(ContactRepositoryInterface::class)->findByEmail($attributes['email']);
         } catch (ContactNotFoundException $ex) {
-            return Contact::create(
+            return $owner->contact()->create(
                 [
                     'name' => $attributes['name'],
                     'contact_numbers' => $attributes['contactNumbers'],

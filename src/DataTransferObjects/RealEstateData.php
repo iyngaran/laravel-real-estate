@@ -181,14 +181,14 @@ class RealEstateData extends DataTransferObject
      */
     public $images;
 
-    public static function fromRequest(Request $request): array
+    public static function fromRequest(Request $request, $owner): array
     {
         $contact = null;
         $serviceList = null;
 
         if ($request->input('data.attributes.contact.email')) {
             if (!$contact = Contact::find($request->input('data.attributes.contact.email'))) {
-                $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request));
+                $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request), $owner);
             }
         }
 

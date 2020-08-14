@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Iyngaran\RealEstate\Actions\CreateContactAction;
 use Iyngaran\RealEstate\DataTransferObjects\ContactData;
 use Iyngaran\RealEstate\Models\Contact;
+use Iyngaran\RealEstate\Models\Owner;
 use Iyngaran\RealEstate\Tests\TestCase;
 
 class CreateContactTest extends TestCase
@@ -25,6 +26,7 @@ class CreateContactTest extends TestCase
     public function a_contact_can_be_created()
     {
         $faker = \Faker\Factory::create();
+        $owner = factory(Owner::class)->create();
 
         $data = [
             'data' => [
@@ -42,7 +44,7 @@ class CreateContactTest extends TestCase
         $contactData = ContactData::fromRequest($request);
 
         $createContactAction =  new CreateContactAction();
-        $contact = $createContactAction->execute($contactData);
+        $contact = $createContactAction->execute($contactData, $owner);
 
         $this->assertNotNull($contact->id);
         $this->assertEquals(1, Contact::count());

@@ -7,6 +7,8 @@ namespace Iyngaran\RealEstate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Iyngaran\RealEstate\Facades\RealEstate;
+use Iyngaran\RealEstate\Models\RealEstatePost;
+use Iyngaran\RealEstate\Observers\RealEstatePostObserver;
 use Iyngaran\RealEstate\Repositories\Contact\ContactRepository;
 use Iyngaran\RealEstate\Repositories\Contact\ContactRepositoryInterface;
 use Iyngaran\RealEstate\Repositories\RealEstate\RealEstateRepository;
@@ -23,6 +25,7 @@ class RealEstateBaseServiceProvider extends ServiceProvider
         }
 
         $this->_registerResources();
+        $this->_registerObservers();
     }
 
     public function register()
@@ -106,5 +109,10 @@ class RealEstateBaseServiceProvider extends ServiceProvider
         $this->app->bind(RealEstateRepositoryInterface::class, RealEstateRepository::class);
         $this->app->bind(ContactRepositoryInterface::class, ContactRepository::class);
         $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
+    }
+
+    private function _registerObservers()
+    {
+        RealEstatePost::observe(RealEstatePostObserver::class);
     }
 }

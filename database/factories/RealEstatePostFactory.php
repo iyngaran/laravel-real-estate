@@ -12,6 +12,7 @@ use Iyngaran\RealEstate\Facades\RealEstate;
 $factory->define(RealEstatePost::class, function (Faker $faker) {
     $size_unit = $faker->randomElement(['Perches', 'Acres', 'Square Metres', 'Square Feet', 'Square yards', 'Hectare']);
     $age_unit = $faker->randomElement(['Months', 'Years']);
+    $owner = factory(\Iyngaran\RealEstate\Models\Owner::class)->create();
 
     return [
         'title' => ucfirst($faker->sentence),
@@ -42,8 +43,10 @@ $factory->define(RealEstatePost::class, function (Faker $faker) {
         'number_of_parking_slots' => $faker->randomNumber(2),
         'property_category' => factory(\Iyngaran\Category\Models\Category::class),
         'property_sub_category' => factory(\Iyngaran\Category\Models\Category::class),
-        'contact_id' => $contact = factory(Contact::class)->create(),
+        'contact_id' => factory(Contact::class)->create(),
         'status' => $faker->randomElement(['Published','Drafted','Pending']),
+        'owner_id' => $owner->id,
+        'owner_type' => get_class($owner),
     ];
 });
 

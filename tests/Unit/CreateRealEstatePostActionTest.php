@@ -31,6 +31,8 @@ class CreateRealEstatePostActionTest extends TestCase
         $category = factory(\Iyngaran\Category\Models\Category::class)->create();
         $subCategory = factory(\Iyngaran\Category\Models\Category::class)->create();
 
+        $owner = factory(\Iyngaran\RealEstate\Models\Owner::class)->create();
+
         $size_unit = $faker->randomElement(['Perches', 'Acres', 'Square Metres', 'Square Feet', 'Square yards', 'Hectare']);
         $age_unit = $faker->randomElement(['Months', 'Years']);
         $currency = $faker->randomElement(['LKR' => 'RS', 'USD' => '$']);
@@ -78,7 +80,7 @@ class CreateRealEstatePostActionTest extends TestCase
         ];
 
         $createRealEstatePostAction =  new CreateRealEstatePostAction();
-        $realEstatePost = $createRealEstatePostAction->execute($realEstatePostData);
+        $realEstatePost = $createRealEstatePostAction->execute($realEstatePostData, $owner);
 
         $this->assertNotNull($realEstatePost->id);
         $this->assertEquals(1, RealEstatePost::count());

@@ -64,4 +64,29 @@ class RealEstatePost extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
+    public function owner()
+    {
+        return $this->morphTo();
+    }
+
+    public function markAsPublished()
+    {
+        $this->status = 'Published';
+        $this->save();
+        return $this;
+    }
+
+    public function markAsDrafted()
+    {
+        $this->status = 'Drafted';
+        $this->save();
+        return $this;
+    }
+
+    public function markAsPending()
+    {
+        $this->status = 'Pending';
+        $this->save();
+        return $this;
+    }
 }

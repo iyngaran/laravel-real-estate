@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Iyngaran\RealEstate\Actions\CreateRealEstatePostAction;
 use Iyngaran\RealEstate\DataTransferObjects\RealEstateData;
 use Iyngaran\RealEstate\Models\Contact;
+use Iyngaran\RealEstate\Models\Owner;
 use Iyngaran\RealEstate\Models\RealEstatePost;
 use Iyngaran\RealEstate\Models\Service;
 use Iyngaran\RealEstate\Tests\TestCase;
@@ -28,6 +29,7 @@ class CreateRealEstateTest extends TestCase
     {
         $faker = \Faker\Factory::create();
         $contact = factory(Contact::class)->create();
+        $owner = factory(Owner::class)->create();
         $services = factory(Service::class, 5)->create();
         $serviceIds = [];
         if ($services) {
@@ -105,23 +107,22 @@ class CreateRealEstateTest extends TestCase
         ];
 
         $request = new \Illuminate\Http\Request($data);
-        $realEstateData = RealEstateData::fromRequest($request);
+        $realEstateData = RealEstateData::fromRequest($request, $owner);
 
         $createRealEstatePostAction =  new CreateRealEstatePostAction();
-        $realEstate = $createRealEstatePostAction->execute($realEstateData);
+        $realEstate = $createRealEstatePostAction->execute($realEstateData, $owner);
 
         $this->assertNotNull($realEstate->id);
         $this->assertEquals(1, RealEstatePost::count());
-        $this->assertEquals(5,$realEstate->services->count());
-        $this->assertEquals(5,Service::count());
+        $this->assertEquals(5, $realEstate->services->count());
+        $this->assertEquals(5, Service::count());
 
         $this->assertEquals(
             [
                 'id' => $services[0]->id,
                 'name' => $services[0]->name,
                 'created_at' => $services[0]->created_at
-            ]
-            ,
+            ],
             [
                 'id' => $realEstate->services[0]->id,
                 'name' => $realEstate->services[0]->name,
@@ -135,8 +136,7 @@ class CreateRealEstateTest extends TestCase
                 'id' => $services[1]->id,
                 'name' => $services[1]->name,
                 'created_at' => $services[1]->created_at
-            ]
-            ,
+            ],
             [
                 'id' => $realEstate->services[1]->id,
                 'name' => $realEstate->services[1]->name,

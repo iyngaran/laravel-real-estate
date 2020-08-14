@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Iyngaran\RealEstate\DataTransferObjects\ContactData;
 use Iyngaran\RealEstate\DataTransferObjects\RealEstateData;
 use Iyngaran\RealEstate\Models\Contact;
+use Iyngaran\RealEstate\Models\Owner;
 use Iyngaran\RealEstate\Models\RealEstatePost;
 use Iyngaran\RealEstate\Models\Service;
 use Iyngaran\RealEstate\Tests\TestCase;
@@ -27,10 +28,9 @@ class RealEstateDataTransferTest extends TestCase
     public function real_estate_data_transfer_test()
     {
         $faker = \Faker\Factory::create();
-        $contact = factory(Contact::class)->create();
-        $services = factory(Service::class, 5)->create();
         $category = factory(\Iyngaran\Category\Models\Category::class)->create();
         $subCategory = factory(\Iyngaran\Category\Models\Category::class)->create();
+        $owner = factory(Owner::class)->create();
 
         $services = factory(Service::class, 5)->create();
         $serviceIds = [];
@@ -113,7 +113,7 @@ class RealEstateDataTransferTest extends TestCase
         ];
 
         $request = new \Illuminate\Http\Request($data);
-        $realEstateData = RealEstateData::fromRequest($request);
+        $realEstateData = RealEstateData::fromRequest($request, $owner);
         $this->assertArrayHasKey('title', $realEstateData);
     }
 

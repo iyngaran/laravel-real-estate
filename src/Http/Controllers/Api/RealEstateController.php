@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Iyngaran\ApiResponse\Http\Traits\ApiResponse;
 use Iyngaran\RealEstate\Actions\CreateRealEstatePostAction;
 use Iyngaran\RealEstate\Actions\DeleteRealEstatePostAction;
+use Iyngaran\RealEstate\Actions\MarkAsDraftedAction;
+use Iyngaran\RealEstate\Actions\MarkAsPendingAction;
+use Iyngaran\RealEstate\Actions\MarkAsPublishedAction;
 use Iyngaran\RealEstate\Actions\UpdateRealEstatePostAction;
 use Iyngaran\RealEstate\DataTransferObjects\RealEstateData;
 use Iyngaran\RealEstate\Http\Requests\RealEstatePostRequest;
@@ -98,6 +101,27 @@ class RealEstateController
     {
         return $this->deletedResponse(
             (new DeleteRealEstatePostAction())->execute($id)
+        );
+    }
+
+    public function markAsPublished($id): JsonResponse
+    {
+        return $this->updatedResponse(
+            new RealEstatePost((new MarkAsPublishedAction())->execute($id))
+        );
+    }
+
+    public function markAsDrafted($id): JsonResponse
+    {
+        return $this->updatedResponse(
+            new RealEstatePost((new MarkAsDraftedAction())->execute($id))
+        );
+    }
+
+    public function markAsPending($id): JsonResponse
+    {
+        return $this->updatedResponse(
+            new RealEstatePost((new MarkAsPendingAction())->execute($id))
         );
     }
 
