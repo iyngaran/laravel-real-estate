@@ -16,6 +16,8 @@ class UpdateRealEstatePostAction
             throw new RealEstateNotFoundException("The Real estate post id # ".$id." not found");
         }
 
+
+
         $realEstatePost->update(
             [
                 'title' => $attributes['title'],
@@ -62,7 +64,10 @@ class UpdateRealEstatePostAction
                 $realEstatePost->subCategory()->associate($attributes['subCategory']);
             }
 
-            $realEstatePost = (new AttachServicesAction())->execute($realEstatePost, $attributes['services']);
+            if ($attributes['services']) {
+                $realEstatePost = (new AttachServicesAction())->execute($realEstatePost, $attributes['services']);
+            }
+
 
             if ($attributes['defaultImage']) {
                 $realEstatePost = (new AttachDefaultImageAction())->execute($realEstatePost, $attributes['defaultImage']);

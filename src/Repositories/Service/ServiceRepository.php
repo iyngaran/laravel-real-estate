@@ -21,9 +21,9 @@ class ServiceRepository implements ServiceRepositoryInterface
         return $service;
     }
 
-    public function findByName(string $name): ?Service
+    public function findByName(string $name): ?Collection
     {
-        $service = Service::where('name', $name)->first();
+        $service = Service::where('name','like', $name."%")->get();
         if (!$service) {
             throw new ServiceNotFoundException("The service name # ".$name." not found");
         }
@@ -39,7 +39,7 @@ class ServiceRepository implements ServiceRepositoryInterface
         return $services;
     }
 
-    public function search(array $query): LengthAwarePaginator
+    public function search(array $query): Collection
     {
         // TODO: Implement search() method.
     }

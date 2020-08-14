@@ -7,7 +7,7 @@ namespace Iyngaran\RealEstate\Traits;
 use Iyngaran\RealEstate\Models\Contact;
 use Iyngaran\RealEstate\Models\RealEstatePost;
 
-class HasRealEstates
+trait HasRealEstates
 {
     public function realEstates()
     {

@@ -4,7 +4,9 @@
 namespace Iyngaran\RealEstate\Http\Controllers\Api;
 
 
+use Illuminate\Http\JsonResponse;
 use Iyngaran\ApiResponse\Http\Traits\ApiResponse;
+use Iyngaran\RealEstate\Http\Resources\Service;
 use Iyngaran\RealEstate\Http\Resources\ServiceCollection;
 use Iyngaran\RealEstate\Repositories\Service\ServiceRepositoryInterface;
 
@@ -29,14 +31,10 @@ class ServiceController
         return $this->responseWithItem(new ServiceCollection($this->_service->getAll()));
     }
 
-    /**
-     * Search categories
-     *
-     * @return JsonResponse
-     */
-    public function search()
+
+    public function searchByName($name)
     {
-        return $this->responseWithItem(new ServiceCollection($this->_service->search([])));
+        return $this->responseWithItem(new ServiceCollection($this->_service->findByName($name)));
     }
 
     /**
@@ -47,7 +45,7 @@ class ServiceController
      */
     public function show($id): JsonResponse
     {
-        return $this->responseWithItem($this->_service->find($id));
+        return $this->responseWithItem(new Service($this->_service->find($id)));
     }
 
 }

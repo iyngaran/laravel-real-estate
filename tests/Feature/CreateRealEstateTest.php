@@ -111,7 +111,6 @@ class CreateRealEstateTest extends TestCase
 
         $createRealEstatePostAction =  new CreateRealEstatePostAction();
         $realEstate = $createRealEstatePostAction->execute($realEstateData, $owner);
-
         $this->assertNotNull($realEstate->id);
         $this->assertEquals(1, RealEstatePost::count());
         $this->assertEquals(5, $realEstate->services->count());

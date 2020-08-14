@@ -7,6 +7,8 @@ Route::patch('real-estates/{id}/mark-as-drafted', 'RealEstateController@markAsDr
 Route::patch('real-estates/{id}/mark-as-pending', 'RealEstateController@markAsPending')
     ->name('real-estates.mark-as-pending');
 
+Route::get('services/search-by-name/{name}', 'ServiceController@searchByName')
+    ->name('services.search');
 Route::resource('services', 'ServiceController');
 
 Route::prefix('units')->group(function () {

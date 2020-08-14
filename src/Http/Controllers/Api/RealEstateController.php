@@ -72,7 +72,7 @@ class RealEstateController
     public function store(RealEstatePostRequest $request): JsonResponse
     {
         return $this->createdResponse(
-            new RealEstatePost((new CreateRealEstatePostAction())->execute(RealEstateData::fromRequest($request)))
+            new RealEstatePost((new CreateRealEstatePostAction())->execute(RealEstateData::fromRequest($request, \Auth::user()), \Auth::user()))
         );
     }
 
@@ -86,7 +86,7 @@ class RealEstateController
     public function update(RealEstatePostRequest $request, $id): JsonResponse
     {
         return $this->updatedResponse(
-            new RealEstatePost((new UpdateRealEstatePostAction())->execute(RealEstateData::fromRequest($request), $id))
+            new RealEstatePost((new UpdateRealEstatePostAction())->execute(RealEstateData::fromRequest($request, \Auth::user()), $id))
         );
     }
 
