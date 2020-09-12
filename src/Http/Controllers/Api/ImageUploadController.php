@@ -5,6 +5,8 @@ namespace Iyngaran\RealEstate\Http\Controllers\Api;
 
 
 
+use Illuminate\Http\Request;
+
 class ImageUploadController
 {
     public function upload(Request $request)
