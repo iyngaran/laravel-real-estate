@@ -10,6 +10,7 @@ Route::patch('real-estates/{id}/mark-as-pending', 'RealEstateController@markAsPe
 Route::get('services/search-by-name/{name}', 'ServiceController@searchByName')
     ->name('services.search');
 Route::resource('services', 'ServiceController');
+Route::post('upload-image', 'ImageUploadController@upload');
 
 Route::prefix('units')->group(function () {
     Route::get('sizes','UnitController@size');
