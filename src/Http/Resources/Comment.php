@@ -17,6 +17,7 @@ class Comment extends JsonResource
                 'attributes' => [
                     'id' => $this->id,
                     'comment' => $this->comment,
+                    'approved' => $this->approved,
                     'comment_on_type' => $this->commentable_type,
                     'comment_on_id' => $this->commentable_id,
                     'added_by' => $this->commented_id,

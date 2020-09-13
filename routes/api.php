@@ -12,6 +12,8 @@ Route::get('services/search-by-name/{name}', 'ServiceController@searchByName')
 Route::resource('services', 'ServiceController');
 Route::post('upload-image', 'ImageUploadController@upload');
 Route::resource('comments', 'CommentController');
+Route::get('comments/approved/{realEstatePost}', 'CommentController@approvedComments')
+    ->name('comments.approved');
 
 Route::prefix('units')->group(function () {
     Route::get('sizes','UnitController@size');

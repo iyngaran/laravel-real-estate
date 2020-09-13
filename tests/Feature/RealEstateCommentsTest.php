@@ -31,7 +31,6 @@ class RealEstateCommentsTest extends TestCase
     public function a_comment_can_be_added_by_a_user()
     {
         $faker = \Faker\Factory::create();
-        $faker = \Faker\Factory::create();
         $realEstate = factory(RealEstatePost::class)->create();
         $user = $this->createUser();
 

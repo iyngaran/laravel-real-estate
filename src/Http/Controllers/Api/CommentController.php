@@ -25,7 +25,7 @@ class CommentController
     public function store(Request $request)
     {
         return $this->createdResponse(
-            new Comment((new CreateCommentAction())->execute(CommentData::fromRequest($request)), \Auth::user())
+            new Comment((new CreateCommentAction())->execute(CommentData::fromRequest($request),\Auth::user()))
         );
     }
 
@@ -36,17 +36,27 @@ class CommentController
         );
     }
 
-    public function update(\Actuallymab\LaravelComment\Models\Comment $comment, $id)
+    public function update($id)
     {
         return $this->updatedResponse(
-            new Comment((new ApproveCommentAction())->execute($comment))
+            new Comment((new ApproveCommentAction())->execute($id))
         );
     }
 
-    public function approvedComments(\Iyngaran\RealEstate\Models\RealEstatePost $realEstatePost)
+    public function approvedComments($realEstatePost)
     {
+        $realEstatePost = \Iyngaran\RealEstate\Models\RealEstatePost::find($realEstatePost);
         return $this->responseWithCollection(
             new CommentCollection($realEstatePost->comments()->approvedComments()->get())
+        );
+    }
+
+
+    public function index($realEstatePost)
+    {
+        $realEstatePost = \Iyngaran\RealEstate\Models\RealEstatePost::find($realEstatePost);
+        return $this->responseWithCollection(
+            new CommentCollection($realEstatePost->comments)
         );
     }
 }
