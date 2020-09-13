@@ -5,9 +5,13 @@ namespace Iyngaran\RealEstate\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Actuallymab\LaravelComment\Contracts\Commentable;
+use Actuallymab\LaravelComment\HasComments;
 
-class RealEstatePost extends Model
+class RealEstatePost extends Model implements Commentable
 {
+    use HasComments;
+
     protected $guarded = [];
     protected $table = 'real_estate_posts';
 
@@ -88,5 +92,10 @@ class RealEstatePost extends Model
         $this->status = 'Pending';
         $this->save();
         return $this;
+    }
+
+    public function mustBeApproved(): bool
+    {
+        return true; // default false
     }
 }

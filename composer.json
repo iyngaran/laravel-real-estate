@@ -13,7 +13,8 @@
   "require": {
     "iyngaran/api-response": "dev-develop",
     "iyngaran/laravel-categories": "dev-develop",
-    "spatie/data-transfer-object": "^1.13"
+    "spatie/data-transfer-object": "^1.13",
+    "actuallymab/laravel-comment": "^1.0@dev"
   },
   "require-dev": {
     "orchestra/testbench": "^5.0@dev"
