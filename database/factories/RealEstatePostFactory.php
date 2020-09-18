@@ -10,9 +10,9 @@ use Iyngaran\RealEstate\Facades\RealEstate;
 
 
 $factory->define(RealEstatePost::class, function (Faker $faker) {
-    $size_unit = $faker->randomElement(['Perches', 'Acres', 'Square Metres', 'Square Feet', 'Square yards', 'Hectare']);
-    $age_unit = $faker->randomElement(['Months', 'Years']);
-    $owner = factory(\Iyngaran\RealEstate\Models\Owner::class)->create();
+    $size_unit = $this->faker->randomElement(config('iyngaran.realestate.size_units'));
+    $age_unit = $this->faker->randomElement(config('iyngaran.realestate.duration_units'));
+    $currency = $this->faker->randomElement(config('iyngaran.realestate.currencies'));
 
     return [
         'title' => ucfirst($faker->sentence),
@@ -43,14 +43,13 @@ $factory->define(RealEstatePost::class, function (Faker $faker) {
         'number_of_parking_slots' => $faker->randomNumber(2),
         'property_category' => factory(\Iyngaran\Category\Models\Category::class),
         'property_sub_category' => factory(\Iyngaran\Category\Models\Category::class),
-        'contact_id' => factory(Contact::class)->create(),
-        'status' => $faker->randomElement(['Published','Drafted','Pending']),
-        'owner_id' => $owner->id,
-        'owner_type' => get_class($owner),
+        'status' => $faker->randomElement(['Published','Drafted','Pending'])
     ];
 });
 
 $factory->afterCreating(RealEstatePost::class, function ($row, $faker) {
+    $user = factory(\Iyngaran\RealEstate\Tests\Models\User::class)->create();
+    $row->user()->associate($user)->save();
     $services = factory(\Iyngaran\RealEstate\Models\Service::class, 5)->create();
     $row->services()->saveMany($services);
 

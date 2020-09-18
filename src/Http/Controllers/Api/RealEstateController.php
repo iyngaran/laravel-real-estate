@@ -72,7 +72,7 @@ class RealEstateController
     public function store(RealEstatePostRequest $request): JsonResponse
     {
         return $this->createdResponse(
-            new RealEstatePost((new CreateRealEstatePostAction())->execute(RealEstateData::fromRequest($request, \Auth::user()), \Auth::user()))
+            new RealEstatePost((new CreateRealEstatePostAction())->execute(RealEstateData::fromRequest($request)))
         );
     }
 

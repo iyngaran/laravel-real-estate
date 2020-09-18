@@ -10,7 +10,7 @@ use Iyngaran\RealEstate\Facades\RealEstate;
 
 class CreateRealEstatePostAction
 {
-    public function execute(array $attributes, $user): RealEstatePost
+    public function execute(array $attributes): RealEstatePost
     {
         $realEstatePost = RealEstatePost::create(
             [
@@ -46,7 +46,10 @@ class CreateRealEstatePostAction
 
         if ($realEstatePost) {
 
-            $realEstatePost->user()->associate($user)->save();
+            if ($attributes['user']) {
+                $realEstatePost->user()->associate($attributes['user'])->save();
+            }
+
 
             if ($attributes['category']) {
                 $realEstatePost->category()->associate($attributes['category'])->save();

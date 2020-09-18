@@ -5,9 +5,7 @@ namespace Iyngaran\RealEstate\Tests\Unit;
 
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Iyngaran\RealEstate\Models\Contact;
 use Iyngaran\RealEstate\Models\RealEstatePost;
-use Iyngaran\RealEstate\Models\Service;
 use Iyngaran\RealEstate\Tests\TestCase;
 
 class DeleteRealEstateTest extends TestCase
@@ -20,7 +18,7 @@ class DeleteRealEstateTest extends TestCase
     }
 
     /**
-     * @test 
+     * @test
      */
     public function delete_a_real_estate_post()
     {
