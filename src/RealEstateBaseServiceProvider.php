@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Iyngaran\RealEstate;
-
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -24,13 +22,13 @@ class RealEstateBaseServiceProvider extends ServiceProvider
             $this->registerPublishing();
         }
 
-        $this->_registerResources();
-        $this->_registerObservers();
+        $this->registerResources();
+        $this->registerObservers();
     }
 
     public function register()
     {
-        $this->_registerRepositories();
+        $this->registerRepositories();
         $this->commands(
             [
             Console\ProcessCommand::class
@@ -38,36 +36,38 @@ class RealEstateBaseServiceProvider extends ServiceProvider
         );
     }
 
-    private function _registerResources()
+    private function registerResources()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadFactoriesFrom(__DIR__.'/../database/factories');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'iyngaran.categories');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadFactoriesFrom(__DIR__ . '/../database/factories');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'iyngaran.categories');
 
-        $this->_registerFacades();
-        $this->_registerWebRoutes();
-        $this->_registerApiRoutes();
+        $this->registerFacades();
+        $this->registerWebRoutes();
+        $this->registerApiRoutes();
     }
 
-    private function _registerWebRoutes()
+    private function registerWebRoutes()
     {
         Route::group(
-            $this->_webRouteConfiguration(), function () {
-                $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+            $this->webRouteConfiguration(),
+            function () {
+                $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
             }
         );
     }
 
-    private function _registerApiRoutes()
+    private function registerApiRoutes()
     {
         Route::group(
-            $this->_apiRouteConfiguration(), function () {
-                $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+            $this->apiRouteConfiguration(),
+            function () {
+                $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
             }
         );
     }
 
-    private function _webRouteConfiguration()
+    private function webRouteConfiguration()
     {
         return  [
             'prefix' => RealEstate::path(),
@@ -76,10 +76,10 @@ class RealEstateBaseServiceProvider extends ServiceProvider
         ];
     }
 
-    private function _apiRouteConfiguration()
+    private function apiRouteConfiguration()
     {
         return  [
-            'prefix' => 'api/'.RealEstate::path(),
+            'prefix' => 'api/' . RealEstate::path(),
             'middleware' => RealEstate::middleware(),
             'namespace' => 'Iyngaran\RealEstate\Http\Controllers\Api'
 
@@ -90,28 +90,32 @@ class RealEstateBaseServiceProvider extends ServiceProvider
     {
         $this->publishes(
             [
-            __DIR__."/../config/iyngaran.realestate.php" => config_path('iyngaran.realestate.php')
-            ], 'realestate-config'
+            __DIR__ . "/../config/iyngaran.realestate.php" => config_path('iyngaran.realestate.php')
+            ],
+            'realestate-config'
         );
+
+        $this->mergeConfigFrom(__DIR__ . "/../config/iyngaran.realestate.php", 'iyngaran.realestate');
     }
 
-    private function _registerFacades()
+    private function registerFacades()
     {
         $this->app->singleton(
-            'RealEstate', function ($app) {
+            'RealEstate',
+            function ($app) {
                 return new \Iyngaran\RealEstate\RealEstate();
             }
         );
     }
 
-    private function _registerRepositories()
+    private function registerRepositories()
     {
         $this->app->bind(RealEstateRepositoryInterface::class, RealEstateRepository::class);
         $this->app->bind(ContactRepositoryInterface::class, ContactRepository::class);
         $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
     }
 
-    private function _registerObservers()
+    private function registerObservers()
     {
         RealEstatePost::observe(RealEstatePostObserver::class);
     }

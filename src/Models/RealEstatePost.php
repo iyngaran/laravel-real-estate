@@ -3,17 +3,15 @@
 
 namespace Iyngaran\RealEstate\Models;
 
-
-use Illuminate\Database\Eloquent\Model;
 use Actuallymab\LaravelComment\Contracts\Commentable;
 use Actuallymab\LaravelComment\HasComments;
+use Illuminate\Database\Eloquent\Model;
 
 class RealEstatePost extends Model implements Commentable
 {
     use HasComments;
 
     protected $guarded = [];
-    protected $table = 'real_estate_posts';
 
     const YES = 'Yes';
     const NO = 'No';
@@ -34,6 +32,12 @@ class RealEstatePost extends Model implements Commentable
         'location_coordinates' => 'array'
     ];
 
+    public static function getTableName()
+    {
+        return config('iyngaran.realestate.real_estate_table_name');
+    }
+
+
     public function services()
     {
         return $this->belongsToMany(
@@ -43,19 +47,23 @@ class RealEstatePost extends Model implements Commentable
         );
     }
 
-    public function contact()
-    {
-        return $this->belongsTo(Contact::class, "contact_id");
-    }
 
     public function category()
     {
-        return $this->belongsTo(\Iyngaran\Category\Models\Category::class, "property_category", "id");
+        return $this->belongsTo(
+            \Iyngaran\Category\Models\Category::class,
+            "property_category",
+            "id"
+        );
     }
 
     public function subCategory()
     {
-        return $this->belongsTo(\Iyngaran\Category\Models\Category::class, "property_sub_category", "id");
+        return $this->belongsTo(
+            \Iyngaran\Category\Models\Category::class,
+            "property_sub_category",
+            "id"
+        );
     }
 
     public function defaultImage()
@@ -68,9 +76,9 @@ class RealEstatePost extends Model implements Commentable
         return $this->morphMany(Image::class, 'imageable');
     }
 
-    public function owner()
+    public function user()
     {
-        return $this->morphTo();
+        return $this->belongsTo(config('iyngaran.realestate.user_model'), "user_id");
     }
 
     public function markAsPublished()

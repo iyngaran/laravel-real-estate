@@ -48,14 +48,13 @@ class CreateRealestatePostsTable extends Migration
             $table->unsignedBigInteger('contact_id')->nullable(true);
             $table->enum('status',['Published','Drafted','Pending']);
             $table->dateTime('published_at')->nullable(true);
-            $table->unsignedBigInteger('owner_id');
-            $table->string('owner_type');
+            $table->unsignedBigInteger('user_id')->nullable(true);
             $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('property_category')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('property_sub_category')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on(config('iyngaran.realestate.user_table_name'))->onDelete('set null');
         });
     }
 

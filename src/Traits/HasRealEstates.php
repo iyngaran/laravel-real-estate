@@ -11,11 +11,6 @@ trait HasRealEstates
 {
     public function realEstates()
     {
-        return $this->morphMany(RealEstatePost::class, 'owner');
-    }
-
-    public function contact()
-    {
-        return $this->morphOne(Contact::class, 'owner');
+        return $this->morphMany(RealEstatePost::class, 'user');
     }
 }

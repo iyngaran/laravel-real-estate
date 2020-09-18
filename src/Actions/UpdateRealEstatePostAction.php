@@ -9,14 +9,12 @@ use Iyngaran\RealEstate\Models\RealEstatePost;
 
 class UpdateRealEstatePostAction
 {
-    public function execute(array $attributes, int $id): RealEstatePost
+    public function execute(array $attributes, int $id, $user): RealEstatePost
     {
         $realEstatePost = RealEstatePost::find($id);
         if (!$realEstatePost) {
             throw new RealEstateNotFoundException("The Real estate post id # ".$id." not found");
         }
-
-
 
         $realEstatePost->update(
             [

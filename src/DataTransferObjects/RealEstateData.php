@@ -3,15 +3,12 @@
 
 namespace Iyngaran\RealEstate\DataTransferObjects;
 
-use Illuminate\Support\Facades\App;
+
 use Iyngaran\Category\Repositories\CategoryRepositoryInterface;
-use Iyngaran\RealEstate\Actions\CreateContactAction;
-use Iyngaran\RealEstate\Models\Service;
-use Iyngaran\RealEstate\Repositories\Contact\ContactRepositoryInterface;
 use Spatie\DataTransferObject\DataTransferObject;
-use \Iyngaran\RealEstate\Models\RealEstatePost;
-use \Iyngaran\Category\Models\Category;
 use \Iyngaran\RealEstate\Models\Contact;
+use Iyngaran\RealEstate\Models\Service;
+use Illuminate\Support\Facades\App;
 use \Illuminate\Http\Request;
 
 class RealEstateData extends DataTransferObject
@@ -156,10 +153,6 @@ class RealEstateData extends DataTransferObject
      */
     public $subCategory;
 
-    /**
-     * @var \Iyngaran\RealEstate\Models\Contact|null
-     */
-    public $contact;
 
     /**
      * @var \Iyngaran\RealEstate\Models\Service[]|null
@@ -181,69 +174,72 @@ class RealEstateData extends DataTransferObject
      */
     public $images;
 
-    public static function fromRequest(Request $request, $owner): array
+
+    public $user;
+
+    public static function fromRequest(Request $request): array
     {
-        $contact = null;
         $serviceList = null;
+        $category = null;
+        $subCategory = null;
+        $user = null;
 
-        if ($request->input('data.attributes.contact.email')) {
-            if (!$contact = Contact::find($request->input('data.attributes.contact.email'))) {
-                $contact = (new CreateContactAction())->execute(ContactData::fromRequest($request), $owner);
-            }
-        }
-
-
-        if ($services = $request->input('data.attributes.service_ids')) {
+        if ($services = $request->input('service_ids')) {
             $serviceList = Service::whereIn('id', $services)->get();
         }
 
-        $category = null;
-        $subCategory = null;
-
-        if ($request->input('data.attributes.category.id')) {
-            $category = App::make(CategoryRepositoryInterface::class)->find($request->input('data.attributes.category.id'));
+        if ($request->input('category.id')) {
+            $category = App::make(CategoryRepositoryInterface::class)->find(
+                $request->input('category.id')
+            );
         }
 
-        if ($request->input('data.attributes.sub_category.id')) {
-            $subCategory = App::make(CategoryRepositoryInterface::class)->find($request->input('data.attributes.sub_category.id'));
+        if ($request->input('sub_category.id')) {
+            $subCategory = App::make(CategoryRepositoryInterface::class)->find(
+                $request->input('sub_category.id')
+            );
         }
 
+        if ($request->input('user.id')) {
+            $userModel = config('iyngaran.realestate.user_model');
+            $user = $userModel::find($request->input('user.id'));
+        }
 
-        return ( new self(
+        return (new self(
             [
-                'title' => ucfirst($request->input('data.attributes.title')),
-                'realEstateFor' => $request->input('data.attributes.real_estate_for'),
-                'condition' => $request->input('data.attributes.condition'),
-                'country' => $request->input('data.attributes.location.country'),
-                'state' => $request->input('data.attributes.location.state'),
-                'city' => $request->input('data.attributes.location.city'),
-                'addressLine_1' => $request->input('data.attributes.location.address_line_1'),
-                'addressLine_2' => $request->input('data.attributes.location.address_line_2'),
-                'coordinates' => $request->input('data.attributes.location.coordinates'),
-                'shortDescription' => $request->input('data.attributes.short_description'),
-                'detailDescription' => $request->input('data.attributes.detail_description'),
-                'numberOfBedrooms' => (int)$request->input('data.attributes.number_of_bedrooms'),
-                'numberOfBathrooms' => (int)$request->input('data.attributes.number_of_bathrooms'),
-                'size' => (float)$request->input('data.attributes.size.size'),
-                'sizeUnit' => $request->input('data.attributes.size.unit'),
-                'age' => (float)$request->input('data.attributes.age.age'),
-                'ageUnit' => $request->input('data.attributes.age.unit'),
-                'price' => (float)$request->input('data.attributes.price.price'),
-                'priceUnit' => $request->input('data.attributes.price.unit'),
-                'minLeaseTerm' => (float)$request->input('data.attributes.min_lease_term.term'),
-                'minLeaseTermUnit' => $request->input('data.attributes.min_lease_term.unit'),
-                'advancedPayment' => (double)$request->input('data.attributes.advanced_payment.payment'),
-                'advancedPaymentUnit' => $request->input('data.attributes.advanced_payment.unit'),
-                'utilityBillPaymentsIncluded' => $request->input('data.attributes.utility_bill_payments_included'),
-                'negotiable' => $request->input('data.attributes.negotiable'),
-                'numberOfParkingSlots' => (int)$request->input('data.attributes.number_of_parking_slots'),
+                'title' => ucfirst($request->input('title')),
+                'realEstateFor' => $request->input('real_estate_for'),
+                'condition' => $request->input('condition'),
+                'country' => $request->input('location.country'),
+                'state' => $request->input('location.state'),
+                'city' => $request->input('location.city'),
+                'addressLine_1' => $request->input('location.address_line_1'),
+                'addressLine_2' => $request->input('location.address_line_2'),
+                'coordinates' => $request->input('location.coordinates'),
+                'shortDescription' => $request->input('short_description'),
+                'detailDescription' => $request->input('detail_description'),
+                'numberOfBedrooms' => (int)$request->input('number_of_bedrooms'),
+                'numberOfBathrooms' => (int)$request->input('number_of_bathrooms'),
+                'size' => (float)$request->input('size.size'),
+                'sizeUnit' => $request->input('size.unit'),
+                'age' => (float)$request->input('age.age'),
+                'ageUnit' => $request->input('age.unit'),
+                'price' => (float)$request->input('price.price'),
+                'priceUnit' => $request->input('price.unit'),
+                'minLeaseTerm' => (float)$request->input('min_lease_term.term'),
+                'minLeaseTermUnit' => $request->input('min_lease_term.unit'),
+                'advancedPayment' => (double)$request->input('advanced_payment.payment'),
+                'advancedPaymentUnit' => $request->input('advanced_payment.unit'),
+                'utilityBillPaymentsIncluded' => $request->input('utility_bill_payments_included'),
+                'negotiable' => $request->input('negotiable'),
+                'numberOfParkingSlots' => (int)$request->input('number_of_parking_slots'),
                 'category' => $category,
                 'subCategory' => $subCategory,
-                'contact' => $contact,
                 'services' => $serviceList,
-                'defaultImage' => $request->input('data.attributes.default_image'),
-                'images' => $request->input('data.attributes.images'),
-                'status' => $request->input('data.attributes.status')
+                'defaultImage' => $request->input('default_image'),
+                'images' => $request->input('images'),
+                'status' => $request->input('status'),
+                'user' => $user
             ]
         ))->toArray();
     }

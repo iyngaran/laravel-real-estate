@@ -9,11 +9,13 @@ use Iyngaran\RealEstate\Actions\CreateRealEstatePostAction;
 use Iyngaran\RealEstate\Actions\UpdateRealEstatePostAction;
 use Iyngaran\RealEstate\Models\RealEstatePost;
 use Iyngaran\RealEstate\Models\Service;
+use Iyngaran\RealEstate\Tests\Models\User;
 use Iyngaran\RealEstate\Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class UpdateRealEstatePostActionTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     protected function setUp(): void
     {
@@ -21,26 +23,24 @@ class UpdateRealEstatePostActionTest extends TestCase
     }
 
     /**
-     * @test 
+     * @test
      */
     public function update_real_estate_post_action_test()
     {
-        $faker = \Faker\Factory::create();
         $factoryRealEstatePost = factory(\Iyngaran\RealEstate\Models\RealEstatePost::class)->create();
-        $contact = factory(\Iyngaran\RealEstate\Models\Contact::class)->create();
+        $user = factory(User::class)->create();
         $services = factory(Service::class, 5)->create();
 
         $category = factory(\Iyngaran\Category\Models\Category::class)->create();
         $subCategory = factory(\Iyngaran\Category\Models\Category::class)->create();
+        $size_unit = $this->faker->randomElement(config('iyngaran.realestate.size_units'));
+        $age_unit = $this->faker->randomElement(config('iyngaran.realestate.duration_units'));
+        $currency = $this->faker->randomElement(config('iyngaran.realestate.currencies'));
 
-        $size_unit = $faker->randomElement(['Perches', 'Acres', 'Square Metres', 'Square Feet', 'Square yards', 'Hectare']);
-        $age_unit = $faker->randomElement(['Months', 'Years']);
-        $currency = $faker->randomElement(['LKR' => 'RS', 'USD' => '$']);
-
-        $default_image = ['url'=>'test1.png','display_order'=>1];
+        $default_image = ['url' => 'test1.png', 'display_order' => 1];
         $images = [
-            ['url'=>'test2.png','display_order'=>2],
-            ['url'=>'test3.png','display_order'=>3]
+            ['url' => 'test2.png', 'display_order' => 2],
+            ['url' => 'test3.png', 'display_order' => 3]
         ];
 
         $realEstatePostData = [
