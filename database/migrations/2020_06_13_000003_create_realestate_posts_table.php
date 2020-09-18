@@ -38,7 +38,7 @@ class CreateRealestatePostsTable extends Migration
             $table->string('min_lease_term_unit',10)->nullable(true);
             $table->float('advanced_payment')->nullable(true);
             $table->string('advanced_payment_unit',3)->nullable(true);
-            $table->string('utility_bill_payments_included',3)->default('No');
+            $table->string('utility_bill_payments_included',3)->nullable()->default('No');
             $table->string('negotiable', 3)->default('No');
             $table->smallInteger('number_of_parking_slots')->nullable(true);
 

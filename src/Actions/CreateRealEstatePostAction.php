@@ -44,12 +44,12 @@ class CreateRealEstatePostAction
             ]
         );
 
+
         if ($realEstatePost) {
 
             if ($attributes['user']) {
                 $realEstatePost->user()->associate($attributes['user'])->save();
             }
-
 
             if ($attributes['category']) {
                 $realEstatePost->category()->associate($attributes['category'])->save();

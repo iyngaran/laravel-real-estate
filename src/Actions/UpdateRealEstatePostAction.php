@@ -9,7 +9,7 @@ use Iyngaran\RealEstate\Models\RealEstatePost;
 
 class UpdateRealEstatePostAction
 {
-    public function execute(array $attributes, int $id, $user): RealEstatePost
+    public function execute(array $attributes, int $id): RealEstatePost
     {
         $realEstatePost = RealEstatePost::find($id);
         if (!$realEstatePost) {
@@ -50,8 +50,8 @@ class UpdateRealEstatePostAction
 
         if ($realEstatePost) {
 
-            if ($attributes['contact']) {
-                $realEstatePost->contact()->associate($attributes['contact']);
+            if ($attributes['user']) {
+                $realEstatePost->user()->associate($attributes['user'])->save();
             }
 
             if ($attributes['category']) {
