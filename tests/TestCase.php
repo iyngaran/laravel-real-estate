@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Config;
 use Iyngaran\Category\CategoryBaseServiceProvider;
 use Iyngaran\RealEstate\RealEstateBaseServiceProvider;
 use Iyngaran\RealEstate\Tests\Models\User;
+use LamaLama\Wishlist\WishlistServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -28,7 +29,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         return [
             CategoryBaseServiceProvider::class,
-            RealEstateBaseServiceProvider::class
+            RealEstateBaseServiceProvider::class,
+            WishlistServiceProvider::class
         ];
     }
 

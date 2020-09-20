@@ -28,6 +28,7 @@ class ServiceController
      */
     public function index()
     {
+        dd("came here...");
         return $this->responseWithItem(new ServiceCollection($this->_service->getAll()));
     }
 
