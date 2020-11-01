@@ -51,6 +51,14 @@ class CommentController
         );
     }
 
+    public function allComments($realEstatePost)
+    {
+        $realEstatePost = \Iyngaran\RealEstate\Models\RealEstatePost::find($realEstatePost);
+        return $this->responseWithCollection(
+            new CommentCollection($realEstatePost->comments()->get())
+        );
+    }
+
 
     public function index($realEstatePost)
     {

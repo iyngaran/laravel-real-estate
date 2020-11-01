@@ -14,6 +14,8 @@ Route::post('upload-image', 'ImageUploadController@upload');
 Route::resource('comments', 'CommentController');
 Route::get('comments/approved/{realEstatePost}', 'CommentController@approvedComments')
     ->name('comments.approved');
+Route::get('comments/all/{realEstatePost}', 'CommentController@allComments')
+    ->name('comments.all');
 
 Route::prefix('units')->group(function () {
     Route::get('sizes','UnitController@size');
