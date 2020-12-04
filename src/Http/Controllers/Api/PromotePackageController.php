@@ -4,6 +4,7 @@
 namespace Iyngaran\RealEstate\Http\Controllers\Api;
 
 
+use Illuminate\Http\JsonResponse;
 use Iyngaran\ApiResponse\Http\Traits\ApiResponse;
 use Iyngaran\RealEstate\Http\Requests\PromotePackageRequest;
 use Iyngaran\RealEstate\Http\Resources\PromotePackage as PromotePackageResource;
