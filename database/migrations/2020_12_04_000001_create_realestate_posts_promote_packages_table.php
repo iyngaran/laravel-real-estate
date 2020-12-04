@@ -14,7 +14,7 @@ class CreateRealestatePostsPromotePackagesTable extends Migration
     public function up()
     {
         Schema::create('real_estate_post_promote_package', function (Blueprint $table) {
-            $table->primary(['real_estate_post_id','promote_package_id']);
+            $table->primary(['real_estate_post_id','promote_package_id'],'post_promotion_id');
             $table->unsignedBigInteger('real_estate_post_id');
             $table->unsignedBigInteger('promote_package_id');
             $table->timestamps();
