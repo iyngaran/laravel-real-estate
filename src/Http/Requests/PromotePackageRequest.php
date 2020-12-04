@@ -11,11 +11,11 @@ class PromotePackageRequest extends FormRequest
     public function rules()
     {
         return [
-            'data.attributes.package_name' => 'required',
-            'data.attributes.short_description' => 'required',
-            'data.attributes.detail_description' => 'required',
-            'data.attributes.status' => 'required',
-            'data.attributes.display_order' => 'required',
+            'package_name' => 'required',
+            'short_description' => 'required',
+            'detail_description' => 'required',
+            'status' => 'required',
+            'display_order' => 'required',
         ];
     }
 }
