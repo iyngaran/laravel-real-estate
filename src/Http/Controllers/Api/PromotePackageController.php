@@ -46,20 +46,27 @@ class PromotePackageController
     }
 
 
-    public function update(PromotePackageRequest $request, PromotePackage $promotePackage): JsonResponse
+    public function update(PromotePackageRequest $request, $id): JsonResponse
     {
+        $promotePackage = PromotePackage::find($id);
         $promotePackage->update(
-            [
-                "package_name" => $request->package_name
-            ]
+            $request->only(
+                'package_name',
+                'price',
+                'short_description',
+                'detail_description',
+                'status',
+                'display_order'
+            )
         );
         return $this->updatedResponse(
             new PromotePackageResource($promotePackage)
         );
     }
 
-    public function destroy(PromotePackage $promotePackage): JsonResponse
+    public function destroy($id): JsonResponse
     {
+        $promotePackage = PromotePackage::find($id);
         return $this->deletedResponse($promotePackage->delete());
     }
 

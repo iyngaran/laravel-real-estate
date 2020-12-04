@@ -17,9 +17,9 @@ Route::get('comments/approved/{realEstatePost}', 'CommentController@approvedComm
 Route::get('comments/all/{realEstatePost}', 'CommentController@allComments')
     ->name('comments.all');
 
-Route::resource('promote-packages', 'PromotePackageController');
 Route::get('promote-packages/enabled', 'PromotePackageController@promotePackage')
     ->name('promote-packages.enabled');
+Route::resource('promote-packages', 'PromotePackageController');
 
 Route::prefix('units')->group(function () {
     Route::get('sizes','UnitController@size');
