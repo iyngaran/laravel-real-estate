@@ -31,7 +31,14 @@ class PromotePackageController
         return $this->createdResponse(
             new PromotePackageResource(
                 PromotePackage::create(
-                    $request->only('package_name', 'short_description', 'detail_description', 'status', 'display_order')
+                    $request->only(
+                        'package_name',
+                        'price',
+                        'short_description',
+                        'detail_description',
+                        'status',
+                        'display_order'
+                    )
                 )
             )
         );
@@ -41,7 +48,14 @@ class PromotePackageController
     public function update(PromotePackageRequest $request, PromotePackage $promotePackage): JsonResponse
     {
         $promotePackage->update(
-            $request->only('package_name', 'short_description', 'detail_description', 'status', 'display_order')
+            $request->only(
+                'package_name',
+                'price',
+                'short_description',
+                'detail_description',
+                'status',
+                'display_order'
+            )
         );
         return $this->updatedResponse(
             new PromotePackageResource($promotePackage)
