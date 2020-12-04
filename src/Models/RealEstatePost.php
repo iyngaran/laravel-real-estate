@@ -81,6 +81,10 @@ class RealEstatePost extends Model implements Commentable
         return $this->belongsTo(config('iyngaran.realestate.user_model'), "user_id");
     }
 
+    public function promotePackages() {
+        return $this->belongsToMany(PromotePackages::class);
+    }
+
     public function markAsPublished()
     {
         $this->status = 'Published';
