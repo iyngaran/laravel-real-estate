@@ -49,14 +49,9 @@ class PromotePackageController
     public function update(PromotePackageRequest $request, PromotePackage $promotePackage): JsonResponse
     {
         $promotePackage->update(
-            $request->only(
-                'package_name',
-                'price',
-                'short_description',
-                'detail_description',
-                'status',
-                'display_order'
-            )
+            [
+                "package_name" => $request->package_name
+            ]
         );
         return $this->updatedResponse(
             new PromotePackageResource($promotePackage)
