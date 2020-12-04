@@ -16,6 +16,7 @@ class CreatePromotePackagesTable extends Migration
         Schema::create('promote_packages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('package_name');
+            $table->double('price',9,2)->default(0);
             $table->string('short_description');
             $table->string('detail_description');
             $table->enum('status',['Enabled','Disabled'])->default('Enabled');
