@@ -13,8 +13,8 @@ class AlterRealestatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('real_estate_posts', function (Blueprint $table) {
-            $table->text('extra_fields')->after('number_of_parking_slots');
+        Schema::table('real_estate_posts', function (Blueprint $table) {
+            $table->json('extra_fields')->nullable()->default(null)->after('number_of_parking_slots');
         });
     }
 
@@ -25,7 +25,7 @@ class AlterRealestatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::create('real_estate_posts', function (Blueprint $table) {
+        Schema::table('real_estate_posts', function (Blueprint $table) {
             $table->dropColumn('extra_fields');
         });
     }

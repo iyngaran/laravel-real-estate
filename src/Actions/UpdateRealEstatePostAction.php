@@ -42,6 +42,7 @@ class UpdateRealEstatePostAction
                 'advanced_payment' => $attributes['advancedPayment'],
                 'advanced_payment_unit' => $attributes['advancedPaymentUnit'],
                 'utility_bill_payments_included' => $attributes['utilityBillPaymentsIncluded'],
+                'extra_fields' => json_encode($attributes['extraFields']),
                 'negotiable' => $attributes['negotiable'],
                 'number_of_parking_slots' => $attributes['numberOfParkingSlots'],
                 'status' => $attributes['status']

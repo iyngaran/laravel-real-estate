@@ -177,6 +177,11 @@ class RealEstateData extends DataTransferObject
 
     public $user;
 
+    /**
+     * @var []|null
+     */
+    public $extraFields;
+
     public static function fromRequest(Request $request): array
     {
         $serviceList = null;
@@ -233,6 +238,7 @@ class RealEstateData extends DataTransferObject
                 'utilityBillPaymentsIncluded' => $request->input('utility_bill_payments_included'),
                 'negotiable' => $request->input('negotiable'),
                 'numberOfParkingSlots' => (int)$request->input('number_of_parking_slots'),
+                'extraFields' => $request->input('extra_fields'),
                 'category' => $category,
                 'subCategory' => $subCategory,
                 'services' => $serviceList,

@@ -40,6 +40,7 @@ class CreateRealEstatePostAction
                 'utility_bill_payments_included' => $attributes['utilityBillPaymentsIncluded'],
                 'negotiable' => $attributes['negotiable'],
                 'number_of_parking_slots' => $attributes['numberOfParkingSlots'],
+                'extra_fields' => json_encode($attributes['extraFields']),
                 'status' => isset($attributes['status']) ? $attributes['status'] : RealEstate::defaultPostStatus()
             ]
         );

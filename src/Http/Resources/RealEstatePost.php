@@ -50,6 +50,7 @@ class RealEstatePost extends JsonResource
                     'utility_bill_payments_included' => $this->utility_bill_payments_included,
                     'negotiable' => $this->negotiable,
                     'number_of_parking_slots' => $this->number_of_parking_slots,
+                    'extra_fields' => json_decode($this->extra_fields),
                     'category' => new \Iyngaran\Category\Http\Resources\Category($this->category),
                     'sub_category' => new \Iyngaran\Category\Http\Resources\Category($this->subCategory),
                     'location' => [
