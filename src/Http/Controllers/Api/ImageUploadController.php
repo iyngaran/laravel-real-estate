@@ -14,7 +14,7 @@ class ImageUploadController
     {
         try {
             $file = $request->file('file');
-            $file_name = trim(str_replace(" ", "_", $file->getClientOriginalName()));
+            $file_name = date('Ymdhis')."_".trim(str_replace(" ", "_", $file->getClientOriginalName()));
             Storage::disk('post-images')->put($file_name, File::get($file));
         } catch (\Exception $e) {
             return response(['errors' => ['message' => $e->getMessage()]], 404);
