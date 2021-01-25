@@ -24,7 +24,7 @@ class RealEstateData extends DataTransferObject
     public $realEstateFor;
 
     /**
-     * @var integer
+     * @var integer|null
      */
     public $condition;
 
