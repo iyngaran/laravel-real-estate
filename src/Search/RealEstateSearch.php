@@ -19,7 +19,16 @@ class RealEstateSearch extends Search
     {
         $currentPage = $filters->input('page');
         $reqPerPage = $filters->input('per-page');
+        $reqSortBy = $filters->input('sort-by');
+        $reqSortOrder = $filters->input('order');
 
+        if (!$reqSortBy) {
+            $reqSortBy = 'created_at';
+        }
+
+        if (!$reqSortOrder) {
+            $reqSortOrder = 'desc';
+        }
 
         if ($reqPerPage) {
             $perPage = $reqPerPage;
@@ -31,6 +40,6 @@ class RealEstateSearch extends Search
             }
         );
 
-        return $this->apply($filters, new RealEstatePost())->orderBy('created_at', 'desc')->paginate($perPage);
+        return $this->apply($filters, new RealEstatePost())->orderBy($reqSortBy, $reqSortOrder)->paginate($perPage);
     }
 }
