@@ -31,6 +31,6 @@ class RealEstateSearch extends Search
             }
         );
 
-        return $this->apply($filters, new RealEstatePost())->paginate($perPage);
+        return $this->apply($filters, new RealEstatePost())->orderBy('created_at', 'desc')->paginate($perPage);
     }
 }
