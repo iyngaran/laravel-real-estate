@@ -178,7 +178,7 @@ class RealEstateData extends DataTransferObject
     public $user;
 
     /**
-     * @var []|null
+     * @var array|null
      */
     public $extraFields;
 
