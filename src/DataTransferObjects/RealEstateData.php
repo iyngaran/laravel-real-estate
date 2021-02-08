@@ -165,12 +165,12 @@ class RealEstateData extends DataTransferObject
     public $status;
 
     /**
-     * @var []|null
+     * @var array|null
      */
     public $defaultImage;
 
     /**
-     * @var []\null
+     * @var array|null
      */
     public $images;
 
