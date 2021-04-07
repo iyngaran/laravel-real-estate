@@ -42,7 +42,7 @@
   "repositories": {
     "dev-package": {
       "type": "vcs",
-      "url": "https://github.com/iyngaran/laravel-categories.git"
+      "url": "https://github.com/iyngaran/laravel-categories-old.git"
     }
   }
 }
