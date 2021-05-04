@@ -41,6 +41,9 @@ class CreateRealEstatePostAction
                 'negotiable' => $attributes['negotiable'],
                 'number_of_parking_slots' => $attributes['numberOfParkingSlots'],
                 'extra_fields' => json_encode($attributes['extraFields']),
+                'property_phone_number_1' => $attributes['property_phone_number_1'],
+                'property_phone_number_2' => $attributes['property_phone_number_2'],
+                'property_email_address' => $attributes['property_email_address'],
                 'status' => isset($attributes['status']) ? $attributes['status'] : RealEstate::defaultPostStatus()
             ]
         );

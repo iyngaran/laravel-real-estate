@@ -182,6 +182,21 @@ class RealEstateData extends DataTransferObject
      */
     public $extraFields;
 
+    /**
+     * @var []|null
+     */
+    public $property_phone_number_1;
+
+    /**
+     * @var []|null
+     */
+    public $property_phone_number_2;
+
+    /**
+     * @var []|null
+     */
+    public $property_email_address;
+
     public static function fromRequest(Request $request): array
     {
         $serviceList = null;
@@ -239,6 +254,9 @@ class RealEstateData extends DataTransferObject
                 'negotiable' => $request->input('negotiable'),
                 'numberOfParkingSlots' => (int)$request->input('number_of_parking_slots'),
                 'extraFields' => $request->input('extra_fields'),
+                'property_phone_number_1' => $request->input('property_phone_number_1'),
+                'property_phone_number_2' => $request->input('property_phone_number_2'),
+                'property_email_address' => $request->input('property_email_address'),
                 'category' => $category,
                 'subCategory' => $subCategory,
                 'services' => $serviceList,
