@@ -14,9 +14,9 @@ class AlterRealestatePostsAddContactTable extends Migration
     public function up()
     {
         Schema::table('real_estate_posts', function (Blueprint $table) {
-            $table->json('property_phone_number_1')->nullable()->default(null)->after('extra_fields');
-            $table->json('property_phone_number_2')->nullable()->default(null)->after('property_phone_number_1');
-            $table->json('property_email_address')->nullable()->default(null)->after('property_phone_number_2');
+            $table->string('property_phone_number_1')->nullable()->default(null)->after('extra_fields');
+            $table->string('property_phone_number_2')->nullable()->default(null)->after('property_phone_number_1');
+            $table->string('property_email_address')->nullable()->default(null)->after('property_phone_number_2');
         });
     }
 
