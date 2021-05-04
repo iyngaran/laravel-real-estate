@@ -13,7 +13,7 @@
   "require": {
     "iyngaran/api-response": "dev-develop",
     "iyngaran/laravel-categories": "dev-develop",
-    "spatie/data-transfer-object": "^1.13",
+    "spatie/data-transfer-object": "^2.8",
     "actuallymab/laravel-comment": "^1.0@dev"
   },
   "require-dev": {
@@ -42,7 +42,7 @@
   "repositories": {
     "dev-package": {
       "type": "vcs",
-      "url": "https://github.com/iyngaran/laravel-categories.git"
+      "url": "https://github.com/iyngaran/laravel-categories-old.git"
     }
   }
 }
