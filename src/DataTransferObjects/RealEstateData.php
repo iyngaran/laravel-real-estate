@@ -183,17 +183,17 @@ class RealEstateData extends DataTransferObject
     public $extraFields;
 
     /**
-     * @var []|null
+     * @var string|null
      */
     public $property_phone_number_1;
 
     /**
-     * @var []|null
+     * @var string|null
      */
     public $property_phone_number_2;
 
     /**
-     * @var []|null
+     * @var string|null
      */
     public $property_email_address;
 
